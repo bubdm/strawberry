@@ -13,7 +13,7 @@ namespace strawberry
 	{
 		public FormMain()
 		{
-			InitializeComponent();
+			InitializeComponent111();
 		}
 	}
 }
