@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using strawberry.client;
 using System.Drawing;
+
 namespace strawberry.lanfolder
 {
 	public class LanFile : ISBFile

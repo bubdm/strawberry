@@ -61,7 +61,7 @@
 			this.treeView1.Name = "treeView1";
 			this.treeView1.Size = new System.Drawing.Size(167, 337);
 			this.treeView1.TabIndex = 0;
-			this.treeView1.Click += new System.EventHandler(this.treeView1_Click);
+			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			// 
 			// listView1
 			// 
@@ -123,7 +123,7 @@
             this.名前の変更ToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(4, 23);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(460, 26);
+			this.menuStrip1.Size = new System.Drawing.Size(368, 26);
 			this.menuStrip1.TabIndex = 8;
 			this.menuStrip1.Text = "menuStrip1";
 			// 

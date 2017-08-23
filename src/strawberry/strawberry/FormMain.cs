@@ -23,18 +23,16 @@ namespace strawberry
 		{
 			InitializeComponent();
 
-			string xmlKind = "net/lan";
-			if (xmlKind == "net:")
-			{
-				client = new NetFolderClient();
-			}
-			else
-			{
-				client = new LanFolderClient();
-			}
+			//string xmlKind = "net/lan";
+			//if (xmlKind == "net:")
+			//{
+			//    client = new NetFolderClient();
+			//}
+			//else
+			//{
+			//    client = new LanFolderClient();
+			//}
 		}
-		bool m_edit = false;
-		string Xmlpath;
 		bool retbool = false;
 
 		XmlDocument doc = new XmlDocument();
@@ -45,8 +43,8 @@ namespace strawberry
 
 			//Xmlpath = doc.SelectSingleNode("lanfolder /root").InnerText;
 			ISBFile XmlpathFile = new LanFile();
-			XmlpathFile.Name = "guominmin2";
-			XmlpathFile.Path = "C:\\guominmin2";
+			XmlpathFile.Name = "yinchunlei";
+			XmlpathFile.Path = "D:\\yinchunlei";
 			return XmlpathFile;
 		}
 
@@ -258,23 +256,26 @@ namespace strawberry
 			return str;
 		}
 
-		//private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-		//{
-		//    str = "";
-		//    TreeNode node = new TreeNode();
-		//    node = treeView1.SelectedNode;
-		//    string snp = selectNodePath(treeView1, node);
+		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+		{
+			str = "";
+			TreeNode node = treeView1.SelectedNode;
+			ISBFile isbFile = node.Tag as ISBFile;
 
-		//    string Path = snp.Substring(0, snp.Length - 1);
 
-		//    textBox1.Text = Path;
-		//    if (node.Parent != null)
-		//    {
-		//        GetMultiNode(node, @Path);
-		//    }
-		//    DisplayListView(Path);
+			string Path = isbFile.Path;
 
-		//}
+			textBox1.Text = Path;
+			if (node.Parent != null)
+			{
+				if (node.Nodes.Count == 0)
+				{
+					PaintTreeView(node, @Path);
+				}
+			}
+			//DisplayListView(Path);
+
+		}
 
 		#region 显示listview
 
@@ -586,29 +587,29 @@ namespace strawberry
 			}
 		}
 
-		private void treeView1_Click(object sender, EventArgs e)
-		{
-			str = "";
-			TreeNode node = treeView1.SelectedNode;
-			ISBFile isbFile = node.Tag as ISBFile;
+		//private void treeView1_Click(object sender, EventArgs e)
+		//{
+		//    str = "";
+		//    TreeNode node = treeView1.SelectedNode;
+		//    ISBFile isbFile = node.Tag as ISBFile;
 
 
-			string Path = isbFile.Path;
+		//    string Path = isbFile.Path;
 
-			textBox1.Text = Path;
-			if (node.Parent != null)
-			{
-				if (node.Nodes.Count == 0)
-				{
-					PaintTreeView(node, @Path);
-				}
-			}
-			//DisplayListView(Path);
-		}
+		//    textBox1.Text = Path;
+		//    if (node.Parent != null)
+		//    {
+		//        if (node.Nodes.Count == 0)
+		//        {
+		//            PaintTreeView(node, @Path);
+		//        }
+		//    }
+		//    DisplayListView(Path);
+		//}
 
 		private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			client.Delete(ISBFile);
+			//client.Delete(ISBFile);
 		}
 
 

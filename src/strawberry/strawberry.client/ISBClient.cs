@@ -5,7 +5,7 @@ using System.Text;
 
 namespace strawberry.client
 {
-	interface ISBClient
+	public interface ISBClient
 	{
 		ISBFile[] List(string fullPath);
 	}
