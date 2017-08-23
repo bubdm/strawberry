@@ -12,5 +12,6 @@ namespace strawberry.client
 		string Path { get; set; }
 		long Size { get; set; }//byte
 		Image Icon { get; set; }
+		bool IsFolder { get; set; }
 	}
 }

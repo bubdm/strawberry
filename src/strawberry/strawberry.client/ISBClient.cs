@@ -3,9 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace strawberry.cmn
+namespace strawberry.client
 {
-	public class Class1
+	interface ISBClient
 	{
+		ISBFile[] List(string fullPath);
 	}
 }
