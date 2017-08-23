@@ -51,20 +51,30 @@
 			this.refresh_button = new System.Windows.Forms.ToolStripButton();
 			this.search_textBox = new System.Windows.Forms.ToolStripTextBox();
 			this.keySearch_button = new System.Windows.Forms.ToolStripButton();
+			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
+			this.splitContainer1.Panel1.SuspendLayout();
+			this.splitContainer1.Panel2.SuspendLayout();
+			this.splitContainer1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// treeView1
 			// 
-			this.treeView1.Location = new System.Drawing.Point(4, 52);
+			this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
+			this.treeView1.Location = new System.Drawing.Point(0, 0);
 			this.treeView1.Name = "treeView1";
-			this.treeView1.Size = new System.Drawing.Size(167, 337);
+			this.treeView1.Size = new System.Drawing.Size(204, 334);
 			this.treeView1.TabIndex = 0;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			// 
 			// listView1
 			// 
+			this.listView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+						| System.Windows.Forms.AnchorStyles.Left)
+						| System.Windows.Forms.AnchorStyles.Right)));
 			this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1,
             this.columnHeader2,
@@ -74,9 +84,9 @@
             this.columnHeader6});
 			this.listView1.FullRowSelect = true;
 			this.listView1.HideSelection = false;
-			this.listView1.Location = new System.Drawing.Point(177, 52);
+			this.listView1.Location = new System.Drawing.Point(0, 0);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(555, 337);
+			this.listView1.Size = new System.Drawing.Size(518, 334);
 			this.listView1.TabIndex = 1;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
@@ -123,45 +133,45 @@
             this.名前の変更ToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(4, 23);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(368, 26);
+			this.menuStrip1.Size = new System.Drawing.Size(368, 25);
 			this.menuStrip1.TabIndex = 8;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
 			// 編集ToolStripMenuItem
 			// 
 			this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-			this.編集ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+			this.編集ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
 			this.編集ToolStripMenuItem.Text = "編集";
 			// 
 			// 参照ToolStripMenuItem
 			// 
 			this.参照ToolStripMenuItem.Name = "参照ToolStripMenuItem";
-			this.参照ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+			this.参照ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
 			this.参照ToolStripMenuItem.Text = "参照";
 			// 
 			// 新しいフォルダToolStripMenuItem
 			// 
 			this.新しいフォルダToolStripMenuItem.Name = "新しいフォルダToolStripMenuItem";
-			this.新しいフォルダToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
+			this.新しいフォルダToolStripMenuItem.Size = new System.Drawing.Size(104, 21);
 			this.新しいフォルダToolStripMenuItem.Text = "新しいフォルダ";
 			// 
 			// 削除ToolStripMenuItem
 			// 
 			this.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem";
-			this.削除ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+			this.削除ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
 			this.削除ToolStripMenuItem.Text = "削除";
 			this.削除ToolStripMenuItem.Click += new System.EventHandler(this.削除ToolStripMenuItem_Click);
 			// 
 			// 設定ToolStripMenuItem
 			// 
 			this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-			this.設定ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
+			this.設定ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
 			this.設定ToolStripMenuItem.Text = "設定";
 			// 
 			// 名前の変更ToolStripMenuItem
 			// 
 			this.名前の変更ToolStripMenuItem.Name = "名前の変更ToolStripMenuItem";
-			this.名前の変更ToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
+			this.名前の変更ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
 			this.名前の変更ToolStripMenuItem.Text = "名前の変更";
 			// 
 			// toolStrip1
@@ -229,15 +239,30 @@
 			this.keySearch_button.Text = "toolStripButton4";
 			this.keySearch_button.Click += new System.EventHandler(this.keySearch_button_Click);
 			// 
+			// splitContainer1
+			// 
+			this.splitContainer1.Location = new System.Drawing.Point(4, 52);
+			this.splitContainer1.Name = "splitContainer1";
+			// 
+			// splitContainer1.Panel1
+			// 
+			this.splitContainer1.Panel1.Controls.Add(this.treeView1);
+			// 
+			// splitContainer1.Panel2
+			// 
+			this.splitContainer1.Panel2.Controls.Add(this.listView1);
+			this.splitContainer1.Size = new System.Drawing.Size(728, 334);
+			this.splitContainer1.SplitterDistance = 206;
+			this.splitContainer1.TabIndex = 10;
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(735, 429);
 			this.Controls.Add(this.toolStrip1);
-			this.Controls.Add(this.listView1);
-			this.Controls.Add(this.treeView1);
 			this.Controls.Add(this.menuStrip1);
+			this.Controls.Add(this.splitContainer1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "FormMain";
 			this.Text = "FormMain";
@@ -246,6 +271,9 @@
 			this.menuStrip1.PerformLayout();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
+			this.splitContainer1.Panel1.ResumeLayout(false);
+			this.splitContainer1.Panel2.ResumeLayout(false);
+			this.splitContainer1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -275,6 +303,7 @@
 		private System.Windows.Forms.ToolStripButton refresh_button;
 		private System.Windows.Forms.ToolStripTextBox search_textBox;
 		private System.Windows.Forms.ToolStripButton keySearch_button;
+		private System.Windows.Forms.SplitContainer splitContainer1;
 	}
 }
 
