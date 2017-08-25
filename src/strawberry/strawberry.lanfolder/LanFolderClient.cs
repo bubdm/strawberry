@@ -39,6 +39,8 @@ namespace strawberry.lanfolder
 					LanFile lanFile = new LanFile();
 					lanFile.Name = file[j].Name;
 					lanFile.Path = fullPath + "\\" + file[j].Name;
+					lanFile.Size = file[j].Length;
+					lanFile.UpdateTime = file[j].LastWriteTime.ToString();
 					lanFile.IsFolder = false;
 					fileList[dircount + j] = lanFile;
 				}
@@ -47,7 +49,7 @@ namespace strawberry.lanfolder
 
 			catch (Exception ex)
 			{
-				MessageBox.Show(ex.Message + "\r\n出错的位置为：FormMain.PaintTreeView()");
+				MessageBox.Show(ex.Message + "\r\n出错的位置为：LanFolderClient.List()");
 				return null;
 			}
 

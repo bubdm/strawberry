@@ -18,7 +18,6 @@ namespace strawberry
 	{
 		ISBClient client = new LanFolderClient();
 
-		string str;
 		public FormMain()
 		{
 			InitializeComponent();
@@ -35,7 +34,7 @@ namespace strawberry
 		}
 		bool retbool = false;
 
-		XmlDocument doc = new XmlDocument();
+		//XmlDocument doc = new XmlDocument();
 		//获得程序所在路径
 		public ISBFile GetPath()
 		{
@@ -56,9 +55,7 @@ namespace strawberry
 			root.Text = rootFile.Path;
 			root.Tag = rootFile;
 			treeView1.Nodes.Add(root);
-
 			PaintTreeView(treeView1.Nodes[0], rootFile.Path);
-
 		}
 
 
@@ -66,15 +63,11 @@ namespace strawberry
 
 		private void PaintTreeView(TreeNode ptreeNode, string fullPath)
 		{
-
 			try
 			{
 				ISBFile[] fileList = client.List(fullPath);
 
-				//treeView.Nodes.Clear(); //清空TreeView
-
 				//循环文件夹
-
 				for (int i = 0; i < fileList.Count(); i++)
 				{
 					TreeNode treeNode = new TreeNode();
@@ -86,94 +79,22 @@ namespace strawberry
 					}
 				}
 			}
-
 			catch (Exception ex)
 			{
-
 				MessageBox.Show(ex.Message + "\r\n出错的位置为：FormMain.PaintTreeView()");
-
 			}
-
 		}
 
 		#endregion
 
-
-		#region 遍历TreeView根节点下文件和文件夹
-
-		private bool GetMultiNode(TreeNode treeNode, string path)
-		{
-
-			if (Directory.Exists(path) == false)
-
-			{ return false; }
-
-
-			DirectoryInfo dirs = new DirectoryInfo(path); //获得程序所在路径的目录对象
-
-			DirectoryInfo[] dir = dirs.GetDirectories();//获得目录下文件夹对象
-
-			FileInfo[] file = dirs.GetFiles();//获得目录下文件对象
-
-			int dircount = dir.Count();//获得文件夹对象数量
-
-			int filecount = file.Count();//获得文件对象数量
-
-			int sumcount = dircount + filecount;
-
-
-			if (sumcount == 0)
-
-			{ return false; }
-
-
-			//循环文件夹
-			if (treeNode.Nodes.Count == 0)
-			{
-				for (int j = 0; j < dircount; j++)
-				{
-					treeNode.Nodes.Add(dir[j].Name);
-				}
-
-			}
-			else
-			{
-				for (int j = 0; j < dircount; j++)
-				{
-					TreeNode ret = FindNode(treeNode.Nodes, dir[j].Name);
-					if (ret == null)
-					{
-						treeNode.Nodes.Add(dir[j].Name);
-						continue;
-					}
-
-					//string pathNodeB = path + "\\" + dir[j].Name;
-
-					//GetMultiNode(treeNode.Nodes[j], pathNodeB);
-
-				}
-			}
-
-
-
-
-			return true;
-
-		}
 		private bool GetAllFile(string path)
 		{
 			DirectoryInfo dirs = new DirectoryInfo(path); //获得程序所在路径的目录对象
-
 			DirectoryInfo[] dir = dirs.GetDirectories();//获得目录下文件夹对象
-
 			FileInfo[] file = dirs.GetFiles();//获得目录下文件对象
-
 			int dircount = dir.Count();//获得文件夹对象数量
-
 			int filecount = file.Count();//获得文件对象数量
-
 			int sumcount = dircount + filecount;
-
 
 			//循环文件夹
 			for (int j = 0; j < dircount; j++)
@@ -235,36 +156,11 @@ namespace strawberry
 			return ret;
 		}
 
-		#endregion
-
-
-		// 返回选中节点的完整路径
-		private string selectNodePath(TreeView treeview, TreeNode node1)
-		{
-			TreeNode tn = new TreeNode();
-			tn = node1.Parent;
-			if (tn == null)
-			{
-				str = str.Insert(0, node1.Text.ToString() + "\\");
-
-			}
-			else
-			{
-				str = str.Insert(0, node1.Text.ToString() + "\\");
-				selectNodePath(treeview, tn);
-			}
-			return str;
-		}
-
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
-			str = "";
 			TreeNode node = treeView1.SelectedNode;
 			ISBFile isbFile = node.Tag as ISBFile;
-
-
 			string Path = isbFile.Path;
-
 			textBox1.Text = Path;
 			if (node.Parent != null)
 			{
@@ -273,7 +169,7 @@ namespace strawberry
 					PaintTreeView(node, @Path);
 				}
 			}
-			//DisplayListView(Path);
+			DisplayListView(Path);
 
 		}
 
@@ -281,69 +177,35 @@ namespace strawberry
 
 		private void DisplayListView(string nodePath)
 		{
-
 			try
 			{
-
 				listView1.Items.Clear(); //清空listView
-
-				DirectoryInfo dirs = new DirectoryInfo(nodePath); //获得程序所在路径的目录对象
-
-				DirectoryInfo[] dir = dirs.GetDirectories();//获得目录下文件夹对象
-
-				FileInfo[] file = dirs.GetFiles();//获得目录下文件对象
-
-				int dircount = dir.Count();//获得文件夹对象数量
-
-				int filecount = file.Count();//获得文件对象数量
-
-				int sumcount = dircount + filecount;
-
-				if (sumcount == 0)
+				ISBFile[] fileList = client.List(nodePath);
+				if (fileList.Count() == 0)
 				{
 					return;
 				}
 
-
-				//循环文件夹
-
-				for (int i = 0; i < dircount; i++)
-				{
-					ListViewItem li = new ListViewItem();
-					li.Text = dir[i].Name;
-					li.SubItems.Add("1");
-					li.SubItems.Add("2");
-					li.SubItems.Add("3");
-					li.SubItems.Add(dir[i].LastWriteTime.ToString());
-					li.SubItems.Add("");
-					listView1.Items.Add(li);
-
-				}
-
-
 				//循环文件
-
-				for (int j = 0; j < filecount; j++)
+				for (int i = 0; i < fileList.Count(); i++)
 				{
 
-					ListViewItem lj = new ListViewItem();
-					lj.Text = file[j].Name;
-					lj.SubItems.Add("1");
-					lj.SubItems.Add("2");
-					lj.SubItems.Add("3");
-					lj.SubItems.Add(file[j].LastWriteTime.ToString());
-					lj.SubItems.Add(string.Format(("{0:N0}"), file[j].Length));
-					listView1.Items.Add(lj);
-
+					ListViewItem li = new ListViewItem();
+					if (!fileList[i].IsFolder)
+					{
+						li.Text = fileList[i].Name;
+						li.SubItems.Add("1");
+						li.SubItems.Add("2");
+						li.SubItems.Add("3");
+						li.SubItems.Add(fileList[i].UpdateTime);
+						li.SubItems.Add(string.Format(("{0:N0}"), fileList[i].Size));
+						listView1.Items.Add(li);
+					}
 				}
-
 			}
-
 			catch (Exception ex)
 			{
-
 				MessageBox.Show(ex.Message + "\r\n出错的位置为：FormMain.DisplayListView()");
-
 			}
 		}
 
@@ -355,12 +217,12 @@ namespace strawberry
 			listView1.Items.Clear();
 			if (e.KeyCode == Keys.Control || e.KeyCode == Keys.Enter)
 			{
-				isTruePath();
+				isValidPath();
 			}
 		}
 
 		//路径有效则跳转
-		private void isTruePath()
+		private void isValidPath()
 		{
 			if (textBox1.Text != null && textBox1.Text.Contains("\\"))
 			{
@@ -370,26 +232,26 @@ namespace strawberry
 					if (b.Length == 2)
 					{
 						string path = b[0] + "\\" + b[1];
-						//if (path == GetPath())
-						//{
-						//    DisplayListView(textBox1.Text);
-						//}
-						//else
-						//{
-						//    MessageBox.Show("无效路径！");
-						//    textBox1.Clear();
-						//}
-					}
-					else
-					{
-						foreach (TreeNode tnc in treeView1.Nodes)
+						if (path == GetPath().Path)
 						{
-							nextNodes(tnc, b[b.Length - 1]);
+							DisplayListView(textBox1.Text);
 						}
-						if (listView1.Items.Count == 0)
+						else
 						{
 							MessageBox.Show("无效路径！");
 							textBox1.Clear();
+						}
+					}
+					else
+					{
+						ISBFile[] fileList = client.List(GetPath().Path);
+						for (int i = 0; i < fileList.Length; i++)
+						{
+							if (fileList[i].Path == textBox1.Text && fileList[i].IsFolder)
+							{
+								DisplayListView(textBox1.Text);
+								break;
+							}
 						}
 					}
 				}
@@ -406,40 +268,11 @@ namespace strawberry
 			}
 		}
 
-		//遍历所有节点
-		private void nextNodes(TreeNode node, string text)
-		{
-			foreach (TreeNode tn in node.Nodes)
-			{
-				if (tn.Text == text.Trim())    //判断节点的名称是否和你的textbox中显示的值相等
-				{
-					str = "";
-					string snp = selectNodePath(treeView1, tn);
-					string Path = snp.Substring(0, snp.Length - 1);
-					if (Path == textBox1.Text)
-					{
-						DisplayListView(textBox1.Text);
-					}
-				}
-			}
-			foreach (TreeNode tn in node.Nodes)
-			{
-				//递归
-				nextNodes(tn, text);
-			}
-		}
-
 		//刷新文件目录
 		private void refresh_button_Click(object sender, EventArgs e)
 		{
-
 			listView1.Items.Clear();
-			
-			isTruePath();
-
-
-			//DisplayListView(textBox1.Text);
-
+			isValidPath();
 		}
 
 
@@ -447,7 +280,6 @@ namespace strawberry
 		private void keySearch_button_Click(object sender, EventArgs e)
 		{
 			bool ret;
-			str = "";
 			if (search_textBox.Text == "")
 			{
 				return;
@@ -464,7 +296,6 @@ namespace strawberry
 		private void search_textBox_KeyUp(object sender, KeyEventArgs e)
 		{
 			bool ret;
-			str = "";
 			if (search_textBox.Text == "")
 			{
 				return;
@@ -504,19 +335,12 @@ namespace strawberry
 			if (e.Column == 3 || e.Column == 5)//需要数值排序的列
 			{
 				listView1.ListViewItemSorter = new ListViewIntSort(e.Column, listView1.Columns[e.Column].Tag);//指定排序器并传送列索引与升序降序关键字
-				for (int i = 0; i < listView1.Items.Count; i++)
-				{
-					if (listView1.Items[i].SubItems[e.Column].Text == "-1")
-					{
-						listView1.Items[i].SubItems[e.Column].Text = "";
-					}
-				}
 			}
 			else
 			{
 				listView1.ListViewItemSorter = new ListViewStrSort(e.Column, listView1.Columns[e.Column].Tag);//指定排序器并传送列索引与升序降序关键字
 			}
-			//listView1.Sort();//对列表进行自定义排序
+			listView1.Sort();//对列表进行自定义排序
 
 		}
 
@@ -567,14 +391,6 @@ namespace strawberry
 			private CaseInsensitiveComparer ObjectCompare = new CaseInsensitiveComparer();
 			public int Compare(object x, object y)
 			{
-				if (((ListViewItem)x).SubItems[col].Text == "")
-				{
-					((ListViewItem)x).SubItems[col].Text = "-1";
-				}
-				if (((ListViewItem)y).SubItems[col].Text == "")
-				{
-					((ListViewItem)y).SubItems[col].Text = "-1";
-				}
 				int tempInt = ObjectCompare.Compare(Convert.ToDecimal(((ListViewItem)x).SubItems[col].Text), Convert.ToDecimal(((ListViewItem)y).SubItems[col].Text));
 				if (descK)
 				{
@@ -586,26 +402,6 @@ namespace strawberry
 				}
 			}
 		}
-
-		//private void treeView1_Click(object sender, EventArgs e)
-		//{
-		//    str = "";
-		//    TreeNode node = treeView1.SelectedNode;
-		//    ISBFile isbFile = node.Tag as ISBFile;
-
-
-		//    string Path = isbFile.Path;
-
-		//    textBox1.Text = Path;
-		//    if (node.Parent != null)
-		//    {
-		//        if (node.Nodes.Count == 0)
-		//        {
-		//            PaintTreeView(node, @Path);
-		//        }
-		//    }
-		//    DisplayListView(Path);
-		//}
 
 		private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
 		{

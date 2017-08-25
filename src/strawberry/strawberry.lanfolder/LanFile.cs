@@ -14,6 +14,7 @@ namespace strawberry.lanfolder
 		public long Size { get; set; }//byte
 		public Image Icon { get; set; }
 		public bool IsFolder { get; set; }
+		public string UpdateTime { get; set; }
 	
 	}
 }

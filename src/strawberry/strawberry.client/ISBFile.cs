@@ -13,5 +13,6 @@ namespace strawberry.client
 		long Size { get; set; }//byte
 		Image Icon { get; set; }
 		bool IsFolder { get; set; }
+		string UpdateTime { get; set; }
 	}
 }
