@@ -34,6 +34,12 @@ namespace strawberry
 			//}
 		}
 		bool retbool = false;
+        string str;
+        private List<string> lstAllPath = new List<string>();
+        private List<TreeNode> lstAllNode = new List<TreeNode>();
+        private string strCurrentPath = "";
+        int index = -1;
+        TreeNode CurrentNode;
 
 		//XmlDocument doc = new XmlDocument();
 		//获得程序所在路径
@@ -157,18 +163,18 @@ namespace strawberry
 			return ret;
 		}
 
-		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-		{
-			TreeNode node = treeView1.SelectedNode;
-			ISBFile isbFile = node.Tag as ISBFile;
-			string Path = isbFile.Path;
-			textBox1.Text = Path;
-			if (node.Nodes.Count == 0)
-			{
-				PaintTreeView(node, @Path);
-			}
-			DisplayListView(Path);
-		}
+		//private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+		//{
+		//    TreeNode node = treeView1.SelectedNode;
+		//    ISBFile isbFile = node.Tag as ISBFile;
+		//    string Path = isbFile.Path;
+		//    textBox1.Text = Path;
+		//    if (node.Nodes.Count == 0)
+		//    {
+		//        PaintTreeView(node, @Path);
+		//    }
+		//    DisplayListView(Path);
+		//}
 
 		#region 显示listview
 
@@ -398,6 +404,132 @@ namespace strawberry
 			//client.Delete(ISBFile);
 		}
 
+          // 返回选中节点的完整路径
+         private string selectNodePath(TreeView treeview, TreeNode node1)
+         {
+             TreeNode tn = new TreeNode();
+             tn = node1.Parent;
+             if (tn == null)
+             {
+                 str = str.Insert(0, node1.Text.ToString() + "\\");
 
+             }
+             else
+             {
+                 str = str.Insert(0, node1.Text.ToString() + "\\");
+                 selectNodePath(treeview, tn);
+             }
+             return str;
+         }
+
+       
+
+         private void toolStripButton1_Click(object sender, EventArgs e)
+         {
+             if (index < 1) return;
+             index = index - 1;
+             string CurrentPath = lstAllPath[index];
+             textBox1.Text = CurrentPath;
+             //TreeNode[] tree = treeView1.Nodes.IndexOf;
+             //TreeNode node1 = treeView1.Nodes[0];
+             string[] Paths = CurrentPath.Split('\\');
+             string NodeName = Paths[Paths.Length - 1];
+             ISBFile[] allfilelist = null;
+             TreeNode node = lstAllNode.Find(a => a.Text == NodeName);
+             
+             if (node != null)
+                 treeView1.SelectedNode = node;
+
+             textBox1.TextChanged -= new System.EventHandler(this.textBox1_TextChanged);
+
+             if (CurrentNode.Parent != null)
+             {
+                 //GetMultiNode(CurrentNode, @CurrentPath);
+                 allfilelist = client.List(CurrentPath);
+             }
+             //DisplayListView(CurrentPath);
+             DisplayListView(Convert.ToString(CurrentPath));
+         }
+       
+
+        //private void bntMove_Click(object sender, EventArgs e)
+        //{
+        //    index = index + 1;
+        //    if (index > lstAllPath.Count) return;
+        //}
+
+
+        private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+
+            if (index != -1 && index < lstAllPath.Count - 1)
+            {
+                string strPath = lstAllPath[index];
+                for (int i = index + 1; i < lstAllPath.Count; i++)
+                {
+                    lstAllPath.Remove(lstAllPath[i]);
+                }
+            }
+            str = "";
+            //TreeNode node = new TreeNode();
+            if (CurrentNode == treeView1.SelectedNode) return;
+            if (!lstAllNode.Contains(CurrentNode) && CurrentNode != null)
+                lstAllNode.Add(CurrentNode);
+            CurrentNode = treeView1.SelectedNode;
+            string snp = selectNodePath(treeView1, CurrentNode);
+
+            string Path = snp.Substring(0, snp.Length - 1);
+            ISBFile[] allfilelist;
+
+
+            textBox1.Text = Path;
+            if (CurrentNode.Parent != null)
+            {
+                //GetMultiNode(CurrentNode, @Path);
+                allfilelist = client.List(Path);
+            }
+            //DisplayListView(Path);
+            DisplayListView(Path); 
+            //string Path = textBox1.Text;//获取当前路径
+            strCurrentPath = Path;
+            lstAllPath.Add(Path);//将路径增加到List中
+            index++;//记录当前位置
+        }
+        //递归查询,找到返回该节点
+        private TreeNode FindNode(TreeNode node, string name)
+        {
+            //接受返回的节点
+            TreeNode ret = null;
+            //循环查找
+            foreach (TreeNode temp in node.Nodes)
+            {
+                //是否有子节点
+                if (temp.Nodes.Count != 0)
+                {
+                    //如果找到
+                    if ((ret = FindNode(temp, name)) != null)
+                    {
+                        return ret;
+                    }
+                }
+                //如果找到
+                if (string.Equals(temp.Text, name))
+                {
+                    return temp;
+                }
+            }
+            return ret;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox1_Click(object sender, EventArgs e)
+        {
+
+        }      
+    }
 	}
-}
+
