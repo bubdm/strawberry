@@ -17,6 +17,7 @@ namespace strawberry
 	public partial class FormMain : Form
 	{
 		ISBClient client = new LanFolderClient();
+		FileInfoList fileInfoList;
 
 		public FormMain()
 		{
@@ -162,15 +163,11 @@ namespace strawberry
 			ISBFile isbFile = node.Tag as ISBFile;
 			string Path = isbFile.Path;
 			textBox1.Text = Path;
-			if (node.Parent != null)
+			if (node.Nodes.Count == 0)
 			{
-				if (node.Nodes.Count == 0)
-				{
-					PaintTreeView(node, @Path);
-				}
+				PaintTreeView(node, @Path);
 			}
 			DisplayListView(Path);
-
 		}
 
 		#region 显示listview
@@ -180,28 +177,48 @@ namespace strawberry
 			try
 			{
 				listView1.Items.Clear(); //清空listView
-				ISBFile[] fileList = client.List(nodePath);
-				if (fileList.Count() == 0)
+				//ISBFile[] fileList = client.List(nodePath);
+				//if (fileList.Count() == 0)
+				//{
+				//    return;
+				//}
+
+				////循环文件
+				//for (int i = 0; i < fileList.Count(); i++)
+				//{
+				//    ListViewItem li = new ListViewItem();
+				//    if (!fileList[i].IsFolder)
+				//    {
+				//        li.Text = fileList[i].Name;
+				//        li.SubItems.Add("1");
+				//        li.SubItems.Add("2");
+				//        li.SubItems.Add("3");
+				//        li.SubItems.Add(fileList[i].UpdateTime);
+				//        li.SubItems.Add(string.Format(("{0:N0}"), fileList[i].Size));
+				//        listView1.Items.Add(li);
+				//    }
+				//}
+				string[] filespath = Directory.GetFiles(nodePath);
+				fileInfoList = new FileInfoList(filespath);
+				if (fileInfoList.list.Count() == 0)
 				{
 					return;
 				}
-
-				//循环文件
-				for (int i = 0; i < fileList.Count(); i++)
+				foreach (FileInfoWithIcon file in fileInfoList.list)
 				{
-
-					ListViewItem li = new ListViewItem();
-					if (!fileList[i].IsFolder)
-					{
-						li.Text = fileList[i].Name;
-						li.SubItems.Add("1");
-						li.SubItems.Add("2");
-						li.SubItems.Add("3");
-						li.SubItems.Add(fileList[i].UpdateTime);
-						li.SubItems.Add(string.Format(("{0:N0}"), fileList[i].Size));
-						listView1.Items.Add(li);
-					}
+					ListViewItem item = new ListViewItem();
+					item.Text = file.fileInfo.Name;
+					item.ImageIndex = file.iconIndex;
+					item.SubItems.Add("1");
+					item.SubItems.Add("2");
+					item.SubItems.Add("3");
+					item.SubItems.Add(file.fileInfo.LastWriteTime.ToString());
+					item.SubItems.Add(string.Format(("{0:N0}"), file.fileInfo.Length));
+					listView1.Items.Add(item);
 				}
+				listView1.LargeImageList = fileInfoList.imageListLargeIcon;
+				listView1.SmallImageList = fileInfoList.imageListSmallIcon;
+				listView1.Show();
 			}
 			catch (Exception ex)
 			{
@@ -217,54 +234,27 @@ namespace strawberry
 			listView1.Items.Clear();
 			if (e.KeyCode == Keys.Control || e.KeyCode == Keys.Enter)
 			{
-				isValidPath();
+				Goto();
 			}
 		}
 
 		//路径有效则跳转
-		private void isValidPath()
+		private void Goto()
 		{
-			if (textBox1.Text != null && textBox1.Text.Contains("\\"))
+			for (int i = 0; i < treeView1.Nodes.Count; i++)
 			{
-				string[] b = textBox1.Text.Split('\\');
-				if (b.Length >= 2 && b[b.Length - 1] != "")
+				TreeNode node = treeView1.Nodes[i];
+				ISBFile isbFile = node.Tag as ISBFile;
+				if (isbFile.Path == textBox1.Text && isbFile.IsFolder)
 				{
-					if (b.Length == 2)
-					{
-						string path = b[0] + "\\" + b[1];
-						if (path == GetPath().Path)
-						{
-							DisplayListView(textBox1.Text);
-						}
-						else
-						{
-							MessageBox.Show("无效路径！");
-							textBox1.Clear();
-						}
-					}
-					else
-					{
-						ISBFile[] fileList = client.List(GetPath().Path);
-						for (int i = 0; i < fileList.Length; i++)
-						{
-							if (fileList[i].Path == textBox1.Text && fileList[i].IsFolder)
-							{
-								DisplayListView(textBox1.Text);
-								break;
-							}
-						}
-					}
+					DisplayListView(textBox1.Text);
+					break;
 				}
 				else
 				{
-					MessageBox.Show("无效路径！");
-					textBox1.Clear();
+					//MessageBox.Show("无效路径！");
+					//textBox1.Clear();
 				}
-			}
-			else
-			{
-				MessageBox.Show("无效路径！");
-				textBox1.Clear();
 			}
 		}
 
@@ -272,7 +262,7 @@ namespace strawberry
 		private void refresh_button_Click(object sender, EventArgs e)
 		{
 			listView1.Items.Clear();
-			isValidPath();
+			Goto();
 		}
 
 

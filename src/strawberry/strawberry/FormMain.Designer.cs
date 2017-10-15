@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
 			this.treeView1 = new System.Windows.Forms.TreeView();
 			this.listView1 = new System.Windows.Forms.ListView();
@@ -52,6 +53,7 @@
 			this.search_textBox = new System.Windows.Forms.ToolStripTextBox();
 			this.keySearch_button = new System.Windows.Forms.ToolStripButton();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
@@ -64,8 +66,11 @@
 			this.treeView1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
 						| System.Windows.Forms.AnchorStyles.Left)
 						| System.Windows.Forms.AnchorStyles.Right)));
+			this.treeView1.ImageIndex = 0;
+			this.treeView1.ImageList = this.imageList1;
 			this.treeView1.Location = new System.Drawing.Point(0, 0);
 			this.treeView1.Name = "treeView1";
+			this.treeView1.SelectedImageIndex = 0;
 			this.treeView1.Size = new System.Drawing.Size(204, 334);
 			this.treeView1.TabIndex = 0;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
@@ -255,6 +260,12 @@
 			this.splitContainer1.SplitterDistance = 206;
 			this.splitContainer1.TabIndex = 10;
 			// 
+			// imageList1
+			// 
+			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+			this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+			this.imageList1.Images.SetKeyName(0, "folder.ico");
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -304,6 +315,7 @@
 		private System.Windows.Forms.ToolStripTextBox search_textBox;
 		private System.Windows.Forms.ToolStripButton keySearch_button;
 		private System.Windows.Forms.SplitContainer splitContainer1;
+		private System.Windows.Forms.ImageList imageList1;
 	}
 }
 
