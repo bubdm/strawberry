@@ -22,6 +22,10 @@ namespace strawberry.lanfolder
 				int filecount = file.Count();                           //获得文件对象数量
 				ISBFile[] fileList = new ISBFile[dircount + filecount]; //文件信息List
 
+				string[] filespath = Directory.GetFiles(fullPath);
+				FileInfoList fileInfoList = new FileInfoList(filespath);
+				Dictionary<string, int> dict = new Dictionary<string, int>();
+
 				//循环文件夹
 				for (int i = 0; i < dircount; i++)
 				{
@@ -33,11 +37,24 @@ namespace strawberry.lanfolder
 					fileList[i] = lanFile;
 				}
 
+				foreach (FileInfoWithIcon fileInf in fileInfoList.list)
+				{
+					dict.Add(fileInf.fileInfo.Name, fileInf.iconIndex);
+				}
+
 				//循环文件
 				for (int j = 0; j < filecount; j++)
 				{
 					LanFile lanFile = new LanFile();
 					lanFile.Name = file[j].Name;
+					foreach (string key in dict.Keys)
+					{
+						if (key == file[j].Name)
+						{
+							lanFile.ImageIndex = dict[key];
+							break;
+						}
+					}
 					lanFile.Path = fullPath + "\\" + file[j].Name;
 					lanFile.Size = file[j].Length;
 					lanFile.UpdateTime = file[j].LastWriteTime.ToString();

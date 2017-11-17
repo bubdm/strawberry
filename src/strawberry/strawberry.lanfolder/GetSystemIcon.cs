@@ -5,6 +5,7 @@ using System.Text;
 using System.Runtime.InteropServices;
 using System.Drawing;
 using Microsoft.Win32;
+using System.Windows.Forms;
 
 namespace strawberry.lanfolder
 {
@@ -89,7 +90,10 @@ namespace strawberry.lanfolder
 				IntPtr IconHnd = new IntPtr(isLarge ? phiconLarge[0] : phiconSmall[0]);
 				resultIcon = Icon.FromHandle(IconHnd);
 			}
-			catch { }
+			catch(Exception e)
+			{
+				MessageBox.Show(e.Message);
+			}
 			return resultIcon;
 		}
 	}
