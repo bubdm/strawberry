@@ -56,6 +56,12 @@ namespace strawberry
 
 		private void FormMain_Load(object sender, EventArgs e)
 		{
+			toolStripStatusLabel1.Visible = false;
+			toolStripStatusLabel2.Visible = false;
+			toolStripStatusLabel3.Visible = false;
+			toolStripStatusLabel4.Visible = false;
+			toolStripStatusLabel5.Visible = false;
+			toolStripStatusLabel6.Visible = false;
 			treeView1.Nodes.Clear(); //清空TreeView
 			TreeNode root = new TreeNode();
 			ISBFile rootFile = GetPath();
@@ -199,9 +205,9 @@ namespace strawberry
 					{
 						li.Text = fileList[i].Name;
 						li.ImageIndex = fileList[i].ImageIndex;
-						li.SubItems.Add("");
-						li.SubItems.Add("");
-						li.SubItems.Add("");
+						li.SubItems.Add("AAA");
+						li.SubItems.Add("---");
+						li.SubItems.Add("123");
 						li.SubItems.Add(fileList[i].UpdateTime);
 						li.SubItems.Add(string.Format(("{0:N0}"), fileList[i].Size));
 						listView1.Items.Add(li);
@@ -513,6 +519,46 @@ namespace strawberry
 
 		private void textBox1_Click(object sender, EventArgs e)
 		{
+
+		}
+
+		private void 详细模式ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			listView1.View = View.Details;
+		}
+
+		private void 图标模式ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			listView1.View = View.LargeIcon;
+		}
+
+		private void listViewItem_Selected(object sender, EventArgs e)
+		{
+			if (listView1.SelectedItems.Count == 0)
+			{
+				toolStripStatusLabel1.Visible = false;
+				toolStripStatusLabel2.Visible = false;
+				toolStripStatusLabel3.Visible = false;
+				toolStripStatusLabel4.Visible = false;
+				toolStripStatusLabel5.Visible = false;
+				toolStripStatusLabel6.Visible = false;
+				return;
+			}
+			else
+			{
+				toolStripStatusLabel1.Visible = true;
+				toolStripStatusLabel2.Visible = true;
+				toolStripStatusLabel3.Visible = true;
+				toolStripStatusLabel4.Visible = true;
+				toolStripStatusLabel5.Visible = true;
+				toolStripStatusLabel6.Visible = true;
+				toolStripStatusLabel1.Text = "名前：" + listView1.SelectedItems[0].Text;
+				toolStripStatusLabel2.Text = "ユーザ：" + listView1.SelectedItems[0].SubItems[1].Text;
+				toolStripStatusLabel3.Text = "状態：" + listView1.SelectedItems[0].SubItems[2].Text;
+				toolStripStatusLabel4.Text = "リビジョン：" + listView1.SelectedItems[0].SubItems[3].Text;
+				toolStripStatusLabel5.Text = "更新日時：" + listView1.SelectedItems[0].SubItems[4].Text;
+				toolStripStatusLabel6.Text = "サイズ：" + listView1.SelectedItems[0].SubItems[5].Text + "KB";
+			}
 
 		}
 	}

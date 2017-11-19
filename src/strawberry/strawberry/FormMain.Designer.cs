@@ -31,6 +31,7 @@
 			this.components = new System.ComponentModel.Container();
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
 			this.treeView1 = new System.Windows.Forms.TreeView();
+			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
 			this.listView1 = new System.Windows.Forms.ListView();
 			this.columnHeader1 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader2 = new System.Windows.Forms.ColumnHeader();
@@ -53,12 +54,22 @@
 			this.search_textBox = new System.Windows.Forms.ToolStripTextBox();
 			this.keySearch_button = new System.Windows.Forms.ToolStripButton();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
+			this.模式切换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.详细模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.图标模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel3 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
+			this.statusStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// treeView1
@@ -74,6 +85,12 @@
 			this.treeView1.Size = new System.Drawing.Size(204, 334);
 			this.treeView1.TabIndex = 0;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
+			// 
+			// imageList1
+			// 
+			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
+			this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
+			this.imageList1.Images.SetKeyName(0, "folder.ico");
 			// 
 			// listView1
 			// 
@@ -95,6 +112,7 @@
 			this.listView1.TabIndex = 1;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
+			this.listView1.SelectedIndexChanged += new System.EventHandler(this.listViewItem_Selected);
 			this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
 			// 
 			// columnHeader1
@@ -135,10 +153,11 @@
             this.新しいフォルダToolStripMenuItem,
             this.削除ToolStripMenuItem,
             this.設定ToolStripMenuItem,
-            this.名前の変更ToolStripMenuItem});
+            this.名前の変更ToolStripMenuItem,
+            this.模式切换ToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(4, 23);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(368, 25);
+			this.menuStrip1.Size = new System.Drawing.Size(436, 25);
 			this.menuStrip1.TabIndex = 8;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
@@ -260,17 +279,86 @@
 			this.splitContainer1.SplitterDistance = 206;
 			this.splitContainer1.TabIndex = 10;
 			// 
-			// imageList1
+			// 模式切换ToolStripMenuItem
 			// 
-			this.imageList1.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("imageList1.ImageStream")));
-			this.imageList1.TransparentColor = System.Drawing.Color.Transparent;
-			this.imageList1.Images.SetKeyName(0, "folder.ico");
+			this.模式切换ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.详细模式ToolStripMenuItem,
+            this.图标模式ToolStripMenuItem});
+			this.模式切换ToolStripMenuItem.Name = "模式切换ToolStripMenuItem";
+			this.模式切换ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
+			this.模式切换ToolStripMenuItem.Text = "模式切换";
+			// 
+			// 详细模式ToolStripMenuItem
+			// 
+			this.详细模式ToolStripMenuItem.Name = "详细模式ToolStripMenuItem";
+			this.详细模式ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.详细模式ToolStripMenuItem.Text = "详细模式";
+			this.详细模式ToolStripMenuItem.Click += new System.EventHandler(this.详细模式ToolStripMenuItem_Click);
+			// 
+			// 图标模式ToolStripMenuItem
+			// 
+			this.图标模式ToolStripMenuItem.Name = "图标模式ToolStripMenuItem";
+			this.图标模式ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+			this.图标模式ToolStripMenuItem.Text = "图标模式";
+			this.图标模式ToolStripMenuItem.Click += new System.EventHandler(this.图标模式ToolStripMenuItem_Click);
+			// 
+			// statusStrip1
+			// 
+			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1,
+            this.toolStripStatusLabel2,
+            this.toolStripStatusLabel3,
+            this.toolStripStatusLabel4,
+            this.toolStripStatusLabel5,
+            this.toolStripStatusLabel6});
+			this.statusStrip1.Location = new System.Drawing.Point(0, 391);
+			this.statusStrip1.Name = "statusStrip1";
+			this.statusStrip1.Size = new System.Drawing.Size(735, 22);
+			this.statusStrip1.TabIndex = 11;
+			this.statusStrip1.Text = "statusStrip1";
+			// 
+			// toolStripStatusLabel1
+			// 
+			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
+			// 
+			// toolStripStatusLabel2
+			// 
+			this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
+			this.toolStripStatusLabel2.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
+			// 
+			// toolStripStatusLabel3
+			// 
+			this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
+			this.toolStripStatusLabel3.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
+			// 
+			// toolStripStatusLabel4
+			// 
+			this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
+			this.toolStripStatusLabel4.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel4.Text = "toolStripStatusLabel4";
+			// 
+			// toolStripStatusLabel5
+			// 
+			this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
+			this.toolStripStatusLabel5.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel5.Text = "toolStripStatusLabel5";
+			// 
+			// toolStripStatusLabel6
+			// 
+			this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
+			this.toolStripStatusLabel6.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
 			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(735, 429);
+			this.ClientSize = new System.Drawing.Size(735, 413);
+			this.Controls.Add(this.statusStrip1);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.menuStrip1);
 			this.Controls.Add(this.splitContainer1);
@@ -285,6 +373,8 @@
 			this.splitContainer1.Panel1.ResumeLayout(false);
 			this.splitContainer1.Panel2.ResumeLayout(false);
 			this.splitContainer1.ResumeLayout(false);
+			this.statusStrip1.ResumeLayout(false);
+			this.statusStrip1.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -316,6 +406,16 @@
 		private System.Windows.Forms.ToolStripButton keySearch_button;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.ImageList imageList1;
+		private System.Windows.Forms.ToolStripMenuItem 模式切换ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 详细模式ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 图标模式ToolStripMenuItem;
+		private System.Windows.Forms.StatusStrip statusStrip1;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel3;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel4;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel5;
+		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel6;
 	}
 }
 
