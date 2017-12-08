@@ -46,6 +46,9 @@
 			this.削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.名前の変更ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.模式切换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.详细模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.图标模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -54,9 +57,6 @@
 			this.search_textBox = new System.Windows.Forms.ToolStripTextBox();
 			this.keySearch_button = new System.Windows.Forms.ToolStripButton();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
-			this.模式切换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.详细模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.图标模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.statusStrip1 = new System.Windows.Forms.StatusStrip();
 			this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel2 = new System.Windows.Forms.ToolStripStatusLabel();
@@ -106,12 +106,14 @@
             this.columnHeader6});
 			this.listView1.FullRowSelect = true;
 			this.listView1.HideSelection = false;
+			this.listView1.LabelEdit = true;
 			this.listView1.Location = new System.Drawing.Point(0, 0);
 			this.listView1.Name = "listView1";
 			this.listView1.Size = new System.Drawing.Size(518, 334);
 			this.listView1.TabIndex = 1;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
+			this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
 			this.listView1.SelectedIndexChanged += new System.EventHandler(this.listViewItem_Selected);
 			this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
 			// 
@@ -157,46 +159,70 @@
             this.模式切换ToolStripMenuItem});
 			this.menuStrip1.Location = new System.Drawing.Point(4, 23);
 			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(436, 25);
+			this.menuStrip1.Size = new System.Drawing.Size(436, 26);
 			this.menuStrip1.TabIndex = 8;
 			this.menuStrip1.Text = "menuStrip1";
 			// 
 			// 編集ToolStripMenuItem
 			// 
 			this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-			this.編集ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+			this.編集ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
 			this.編集ToolStripMenuItem.Text = "編集";
 			// 
 			// 参照ToolStripMenuItem
 			// 
 			this.参照ToolStripMenuItem.Name = "参照ToolStripMenuItem";
-			this.参照ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+			this.参照ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
 			this.参照ToolStripMenuItem.Text = "参照";
 			// 
 			// 新しいフォルダToolStripMenuItem
 			// 
 			this.新しいフォルダToolStripMenuItem.Name = "新しいフォルダToolStripMenuItem";
-			this.新しいフォルダToolStripMenuItem.Size = new System.Drawing.Size(104, 21);
+			this.新しいフォルダToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
 			this.新しいフォルダToolStripMenuItem.Text = "新しいフォルダ";
 			// 
 			// 削除ToolStripMenuItem
 			// 
 			this.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem";
-			this.削除ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+			this.削除ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
 			this.削除ToolStripMenuItem.Text = "削除";
 			this.削除ToolStripMenuItem.Click += new System.EventHandler(this.削除ToolStripMenuItem_Click);
 			// 
 			// 設定ToolStripMenuItem
 			// 
 			this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-			this.設定ToolStripMenuItem.Size = new System.Drawing.Size(44, 21);
+			this.設定ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
 			this.設定ToolStripMenuItem.Text = "設定";
 			// 
 			// 名前の変更ToolStripMenuItem
 			// 
 			this.名前の変更ToolStripMenuItem.Name = "名前の変更ToolStripMenuItem";
-			this.名前の変更ToolStripMenuItem.Size = new System.Drawing.Size(80, 21);
+			this.名前の変更ToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
 			this.名前の変更ToolStripMenuItem.Text = "名前の変更";
+			this.名前の変更ToolStripMenuItem.Click += new System.EventHandler(this.名前の変更ToolStripMenuItem_Click);
+			// 
+			// 模式切换ToolStripMenuItem
+			// 
+			this.模式切换ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.详细模式ToolStripMenuItem,
+            this.图标模式ToolStripMenuItem});
+			this.模式切换ToolStripMenuItem.Name = "模式切换ToolStripMenuItem";
+			this.模式切换ToolStripMenuItem.Size = new System.Drawing.Size(68, 22);
+			this.模式切换ToolStripMenuItem.Text = "模式切换";
+			// 
+			// 详细模式ToolStripMenuItem
+			// 
+			this.详细模式ToolStripMenuItem.Name = "详细模式ToolStripMenuItem";
+			this.详细模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.详细模式ToolStripMenuItem.Text = "详细模式";
+			this.详细模式ToolStripMenuItem.Click += new System.EventHandler(this.详细模式ToolStripMenuItem_Click);
+			// 
+			// 图标模式ToolStripMenuItem
+			// 
+			this.图标模式ToolStripMenuItem.Name = "图标模式ToolStripMenuItem";
+			this.图标模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.图标模式ToolStripMenuItem.Text = "图标模式";
+			this.图标模式ToolStripMenuItem.Click += new System.EventHandler(this.图标模式ToolStripMenuItem_Click);
 			// 
 			// toolStrip1
 			// 
@@ -279,29 +305,6 @@
 			this.splitContainer1.SplitterDistance = 206;
 			this.splitContainer1.TabIndex = 10;
 			// 
-			// 模式切换ToolStripMenuItem
-			// 
-			this.模式切换ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.详细模式ToolStripMenuItem,
-            this.图标模式ToolStripMenuItem});
-			this.模式切换ToolStripMenuItem.Name = "模式切换ToolStripMenuItem";
-			this.模式切换ToolStripMenuItem.Size = new System.Drawing.Size(68, 21);
-			this.模式切换ToolStripMenuItem.Text = "模式切换";
-			// 
-			// 详细模式ToolStripMenuItem
-			// 
-			this.详细模式ToolStripMenuItem.Name = "详细模式ToolStripMenuItem";
-			this.详细模式ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.详细模式ToolStripMenuItem.Text = "详细模式";
-			this.详细模式ToolStripMenuItem.Click += new System.EventHandler(this.详细模式ToolStripMenuItem_Click);
-			// 
-			// 图标模式ToolStripMenuItem
-			// 
-			this.图标模式ToolStripMenuItem.Name = "图标模式ToolStripMenuItem";
-			this.图标模式ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.图标模式ToolStripMenuItem.Text = "图标模式";
-			this.图标模式ToolStripMenuItem.Click += new System.EventHandler(this.图标模式ToolStripMenuItem_Click);
-			// 
 			// statusStrip1
 			// 
 			this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -311,46 +314,46 @@
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5,
             this.toolStripStatusLabel6});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 391);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 390);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(735, 22);
+			this.statusStrip1.Size = new System.Drawing.Size(735, 23);
 			this.statusStrip1.TabIndex = 11;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
 			// toolStripStatusLabel1
 			// 
 			this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
-			this.toolStripStatusLabel1.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel1.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel1.Text = "toolStripStatusLabel1";
 			// 
 			// toolStripStatusLabel2
 			// 
 			this.toolStripStatusLabel2.Name = "toolStripStatusLabel2";
-			this.toolStripStatusLabel2.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel2.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel2.Text = "toolStripStatusLabel2";
 			// 
 			// toolStripStatusLabel3
 			// 
 			this.toolStripStatusLabel3.Name = "toolStripStatusLabel3";
-			this.toolStripStatusLabel3.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel3.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel3.Text = "toolStripStatusLabel3";
 			// 
 			// toolStripStatusLabel4
 			// 
 			this.toolStripStatusLabel4.Name = "toolStripStatusLabel4";
-			this.toolStripStatusLabel4.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel4.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel4.Text = "toolStripStatusLabel4";
 			// 
 			// toolStripStatusLabel5
 			// 
 			this.toolStripStatusLabel5.Name = "toolStripStatusLabel5";
-			this.toolStripStatusLabel5.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel5.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel5.Text = "toolStripStatusLabel5";
 			// 
 			// toolStripStatusLabel6
 			// 
 			this.toolStripStatusLabel6.Name = "toolStripStatusLabel6";
-			this.toolStripStatusLabel6.Size = new System.Drawing.Size(131, 17);
+			this.toolStripStatusLabel6.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
 			// 
 			// FormMain

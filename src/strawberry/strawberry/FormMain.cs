@@ -12,6 +12,7 @@ using System.Collections;
 using Microsoft.VisualBasic;
 using strawberry.lanfolder;
 using strawberry.client;
+using Microsoft.VisualBasic.Devices;
 namespace strawberry
 {
 	public partial class FormMain : Form
@@ -204,6 +205,7 @@ namespace strawberry
 					if (!fileList[i].IsFolder)
 					{
 						li.Text = fileList[i].Name;
+						li.Tag = nodePath + "\\" + fileList[i].Name;
 						li.ImageIndex = fileList[i].ImageIndex;
 						li.SubItems.Add("AAA");
 						li.SubItems.Add("---");
@@ -560,6 +562,24 @@ namespace strawberry
 				toolStripStatusLabel6.Text = "サイズ：" + listView1.SelectedItems[0].SubItems[5].Text + "KB";
 			}
 
+		}
+
+		private void 名前の変更ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			listView1.FocusedItem.BeginEdit();
+		}
+
+		private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
+		{
+			string path = (string)listView1.FocusedItem.Tag;
+			string nodePath = path.Replace("\\" + listView1.FocusedItem.Text, "");
+			string newName = e.Label.ToString();
+			if (File.Exists(nodePath + "\\" + newName) == false)
+			{
+				Computer MyComputer = new Computer();
+				MyComputer.FileSystem.RenameFile(path, newName);
+			}
+			DisplayListView(nodePath);
 		}
 	}
 }
