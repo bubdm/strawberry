@@ -36,11 +36,24 @@ namespace strawberry
 		}
 		bool retbool = false;
         string str;
-        private List<string> lstAllPath = new List<string>();
+        //private List<string> lstAllPath = new List<string>();
         private List<TreeNode> lstAllNode = new List<TreeNode>();
         private string strCurrentPath = "";
         int index = -1;
+		int backint = 0;
+		int upint = 0;
+		bool backupbool = false;
         TreeNode CurrentNode;
+
+		private Dictionary<int, string> dicIndex = new Dictionary<int, string>();
+
+		private int dicIndexCnt
+		{
+			get
+			{
+				return dicIndex.Count;
+			}
+		}
 
 		//XmlDocument doc = new XmlDocument();
 		//获得程序所在路径
@@ -172,15 +185,31 @@ namespace strawberry
 
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
+			index = index + 1;
 			TreeNode node = treeView1.SelectedNode;
+			//
+			lstAllNode.Add(node);
 			ISBFile isbFile = node.Tag as ISBFile;
 			string Path = isbFile.Path;
+			//
+			dicIndex.Add(dicIndexCnt, Path);
 			textBox1.Text = Path;
 			if (node.Nodes.Count == 0)
 			{
 				PaintTreeView(node, @Path);
 			}
 			DisplayListView(Path);
+
+			toolStripButton1.Enabled = true;
+			if (backupbool == false)
+			{
+				backint = 0;
+				upint = 0;
+			}
+			else
+			{
+				backupbool = false;
+			}
 		}
 
 		#region 显示listview
@@ -224,6 +253,43 @@ namespace strawberry
 				MessageBox.Show(ex.Message + "\r\n出错的位置为：FormMain.DisplayListView()");
 			}
 		}
+
+		//private void DisplayTreeView(string nodePath)
+		//{
+		//    try
+		//    {
+		//        ISBFile[] fileList = client.List(nodePath);
+		//        if (fileList.Count() == 0)
+		//        {
+		//            return;
+		//        }
+		//        //string[] filespath = Directory.GetFiles(nodePath);
+		//        //fileInfoList = new FileInfoList(filespath);
+
+		//        //循环文件
+		//        for (int i = 0; i < fileList.Count(); i++)
+		//        {
+		//            ListViewItem li = new ListViewItem();
+		//            if (!fileList[i].IsFolder)
+		//            {
+		//                li.Text = fileList[i].Name;
+		//                li.Tag = nodePath + "\\" + fileList[i].Name;
+		//                li.ImageIndex = fileList[i].ImageIndex;
+		//                li.SubItems.Add("AAA");
+		//                li.SubItems.Add("---");
+		//                li.SubItems.Add("123");
+		//                li.SubItems.Add(fileList[i].UpdateTime);
+		//                li.SubItems.Add(string.Format(("{0:N0}"), fileList[i].Size));
+		//                listView1.Items.Add(li);
+		//            }
+		//            treeView1.Show();
+		//        }
+		//    }
+		//    catch (Exception ex)
+		//    {
+		//        MessageBox.Show(ex.Message + "\r\n出错的位置为：FormMain.DisplayTreeView()");
+		//    }
+		//}
 
 		#endregion
 
@@ -415,79 +481,6 @@ namespace strawberry
 			return str;
 		}
 
-
-
-		private void toolStripButton1_Click(object sender, EventArgs e)
-		{
-			if (index < 1) return;
-			index = index - 1;
-			string CurrentPath = lstAllPath[index];
-			textBox1.Text = CurrentPath;
-			//TreeNode[] tree = treeView1.Nodes.IndexOf;
-			//TreeNode node1 = treeView1.Nodes[0];
-			string[] Paths = CurrentPath.Split('\\');
-			string NodeName = Paths[Paths.Length - 1];
-			ISBFile[] allfilelist = null;
-			TreeNode node = lstAllNode.Find(a => a.Text == NodeName);
-
-			if (node != null)
-				treeView1.SelectedNode = node;
-
-			textBox1.TextChanged -= new System.EventHandler(this.textBox1_TextChanged);
-
-			if (CurrentNode.Parent != null)
-			{
-				//GetMultiNode(CurrentNode, @CurrentPath);
-				allfilelist = client.List(CurrentPath);
-			}
-			//DisplayListView(CurrentPath);
-			DisplayListView(Convert.ToString(CurrentPath));
-		}
-
-
-        //private void bntMove_Click(object sender, EventArgs e)
-        //{
-        //    index = index + 1;
-        //    if (index > lstAllPath.Count) return;
-        //}
-
-
-		//private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
-		//{
-
-		//    if (index != -1 && index < lstAllPath.Count - 1)
-		//    {
-		//        string strPath = lstAllPath[index];
-		//        for (int i = index + 1; i < lstAllPath.Count; i++)
-		//        {
-		//            lstAllPath.Remove(lstAllPath[i]);
-		//        }
-		//    }
-		//    str = "";
-		//    //TreeNode node = new TreeNode();
-		//    if (CurrentNode == treeView1.SelectedNode) return;
-		//    if (!lstAllNode.Contains(CurrentNode) && CurrentNode != null)
-		//        lstAllNode.Add(CurrentNode);
-		//    CurrentNode = treeView1.SelectedNode;
-		//    string snp = selectNodePath(treeView1, CurrentNode);
-
-		//    string Path = snp.Substring(0, snp.Length - 1);
-		//    ISBFile[] allfilelist;
-
-
-		//    textBox1.Text = Path;
-		//    if (CurrentNode.Parent != null)
-		//    {
-		//        //GetMultiNode(CurrentNode, @Path);
-		//        allfilelist = client.List(Path);
-		//    }
-		//    //DisplayListView(Path);
-		//    DisplayListView(Path); 
-		//    //string Path = textBox1.Text;//获取当前路径
-		//    strCurrentPath = Path;
-		//    lstAllPath.Add(Path);//将路径增加到List中
-		//    index++;//记录当前位置
-		//}
         //递归查询,找到返回该节点
 		private TreeNode FindNode(TreeNode node, string name)
 		{
@@ -580,6 +573,98 @@ namespace strawberry
 				MyComputer.FileSystem.RenameFile(path, newName);
 			}
 			DisplayListView(nodePath);
+		}
+
+		private void toolStripButton1_Click(object sender, EventArgs e)
+		{
+			//if (index < 2)
+			//{
+			//    toolStripButton1.Enabled = false;
+			//    backupbool = false;
+			//    treeView1.SelectedNode = treeView1.Nodes[0];
+			//    index = index - 2;
+			//    //return;
+			//}
+
+			index = index - 1;
+			//string CurrentPath = lstAllPath[index];
+
+			string CurrentPath = dicIndex[index];
+			textBox1.Text = CurrentPath;
+			//TreeNode[] tree = treeView1.Nodes.IndexOf;
+			//TreeNode node1 = treeView1.Nodes[0];
+			string[] Paths = CurrentPath.Split('\\');
+			string NodeName = Paths[Paths.Length - 1];
+			ISBFile[] allfilelist = null;
+			TreeNode node = lstAllNode.Find(a => a.Text == NodeName);
+
+			if (index < 1)
+			{
+				backupbool = true;
+				treeView1.SelectedNode = treeView1.Nodes[0];
+				index = index - 1;
+				backint = backint + 1;
+				toolStripButton1.Enabled = false;
+				//return;
+			}
+			else if (node != null & treeView1.SelectedNode != node)
+			{
+				backupbool = true;
+				treeView1.SelectedNode = node;
+				index = index - 1;
+				backint = backint + 1;
+			}
+
+			textBox1.TextChanged -= new System.EventHandler(this.textBox1_TextChanged);
+
+			//if (CurrentNode.Parent != null)
+			//{
+				//GetMultiNode(CurrentNode, @CurrentPath);
+				allfilelist = client.List(CurrentPath);
+			//}
+			
+			DisplayListView(Convert.ToString(CurrentPath));
+			toolStripButton2.Enabled = true;
+		}
+
+		private void toolStripButton2_Click(object sender, EventArgs e)
+		{
+			//if (index < 1) return;
+			index = index + 1;
+
+			string CurrentPath = dicIndex[index];
+			textBox1.Text = CurrentPath;
+			//TreeNode[] tree = treeView1.Nodes.IndexOf;
+			//TreeNode node1 = treeView1.Nodes[0];
+			string[] Paths = CurrentPath.Split('\\');
+			string NodeName = Paths[Paths.Length - 1];
+			ISBFile[] allfilelist = null;
+			TreeNode node = lstAllNode.Find(a => a.Text == NodeName);
+
+			if (node != null & treeView1.SelectedNode != node)
+			{
+				backupbool = true;
+				treeView1.SelectedNode = node;
+				index = index - 1;
+			}
+
+			textBox1.TextChanged -= new System.EventHandler(this.textBox1_TextChanged);
+
+			//if (CurrentNode.Parent != null)
+			//{
+			//GetMultiNode(CurrentNode, @CurrentPath);
+			allfilelist = client.List(CurrentPath);
+			//}
+
+			DisplayListView(Convert.ToString(CurrentPath));
+
+			upint = upint + 1;
+			if (backint == upint)
+			{
+				toolStripButton2.Enabled = false;
+				backint = 0;
+				upint = 0;
+			}
 		}
 	}
 }
