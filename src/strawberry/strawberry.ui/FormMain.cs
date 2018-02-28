@@ -11,7 +11,8 @@ using System.Xml;
 using System.Collections;
 using strawberry.lanfolder;
 using strawberry.client;
-namespace strawberry
+
+namespace strawberry.ui
 {
 	public partial class FormMain : Form
 	{
@@ -33,15 +34,15 @@ namespace strawberry
 			//}
 		}
 		bool retbool = false;
-        string str;
-        //private List<string> lstAllPath = new List<string>();
-        private List<TreeNode> lstAllNode = new List<TreeNode>();
-        private string strCurrentPath = "";
-        int index = -1;
+		string str;
+		//private List<string> lstAllPath = new List<string>();
+		private List<TreeNode> lstAllNode = new List<TreeNode>();
+		private string strCurrentPath = "";
+		int index = -1;
 		int backint = 0;
 		int upint = 0;
 		bool backupbool = false;
-        TreeNode CurrentNode;
+		TreeNode CurrentNode;
 
 		private Dictionary<int, string> dicIndex = new Dictionary<int, string>();
 
@@ -486,7 +487,7 @@ namespace strawberry
 			return str;
 		}
 
-        //递归查询,找到返回该节点
+		//递归查询,找到返回该节点
 		private TreeNode FindNode(TreeNode node, string name)
 		{
 			//接受返回的节点
@@ -623,10 +624,10 @@ namespace strawberry
 
 			//if (CurrentNode.Parent != null)
 			//{
-				//GetMultiNode(CurrentNode, @CurrentPath);
-				allfilelist = client.List(CurrentPath);
+			//GetMultiNode(CurrentNode, @CurrentPath);
+			allfilelist = client.List(CurrentPath);
 			//}
-			
+
 			DisplayListView(Convert.ToString(CurrentPath));
 			toolStripButton2.Enabled = true;
 		}
@@ -672,4 +673,3 @@ namespace strawberry
 		}
 	}
 }
-
