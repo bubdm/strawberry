@@ -9,10 +9,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Xml;
 using System.Collections;
-using Microsoft.VisualBasic;
 using strawberry.lanfolder;
 using strawberry.client;
-using Microsoft.VisualBasic.Devices;
 namespace strawberry
 {
 	public partial class FormMain : Form
@@ -251,6 +249,7 @@ namespace strawberry
 			catch (Exception ex)
 			{
 				MessageBox.Show(ex.Message + "\r\n出错的位置为：FormMain.DisplayListView()");
+				return;
 			}
 		}
 
@@ -460,7 +459,13 @@ namespace strawberry
 
 		private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//client.Delete(ISBFile);
+			string filePath = (string)listView1.FocusedItem.Tag;
+			string nodePath = filePath.Replace("\\" + listView1.FocusedItem.Text, "");
+			if (File.Exists(filePath))
+			{
+				client.Delete(filePath);
+			}
+			DisplayListView(nodePath);
 		}
 
 		// 返回选中节点的完整路径
@@ -569,8 +574,7 @@ namespace strawberry
 			string newName = e.Label.ToString();
 			if (File.Exists(nodePath + "\\" + newName) == false)
 			{
-				Computer MyComputer = new Computer();
-				MyComputer.FileSystem.RenameFile(path, newName);
+				client.Rename(path, newName);
 			}
 			DisplayListView(nodePath);
 		}

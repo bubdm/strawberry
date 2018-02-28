@@ -5,6 +5,8 @@ using System.Text;
 using System.IO;
 using System.Windows.Forms;
 using strawberry.client;
+using Microsoft.VisualBasic;
+using Microsoft.VisualBasic.Devices;
 
 namespace strawberry.lanfolder
 {
@@ -70,6 +72,17 @@ namespace strawberry.lanfolder
 				return null;
 			}
 
+		}
+
+		public void Rename(string filePath, string newFilename)
+		{
+			Computer MyComputer = new Computer();
+			MyComputer.FileSystem.RenameFile(filePath, newFilename);
+		}
+
+		public void Delete(string filePath)
+		{
+			File.Delete(filePath);
 		}
 	}
 }

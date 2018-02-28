@@ -8,5 +8,7 @@ namespace strawberry.client
 	public interface ISBClient
 	{
 		ISBFile[] List(string fullPath);
+		void Rename(string filePath, string newFilename);
+		void Delete(string filePath);
 	}
 }
