@@ -460,13 +460,13 @@ namespace strawberry.ui
 
 		private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			string filePath = (string)listView1.FocusedItem.Tag;
-			string nodePath = filePath.Replace("\\" + listView1.FocusedItem.Text, "");
-			if (File.Exists(filePath))
-			{
-				client.Delete(filePath);
-			}
-			DisplayListView(nodePath);
+			//string filePath = (string)listView1.FocusedItem.Tag;
+			//string nodePath = filePath.Replace("\\" + listView1.FocusedItem.Text, "");
+			//if (File.Exists(filePath))
+			//{
+			//    client.Delete(filePath);
+			//}
+			//DisplayListView(nodePath);
 		}
 
 		// 返回选中节点的完整路径
@@ -565,19 +565,7 @@ namespace strawberry.ui
 
 		private void 名前の変更ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			listView1.FocusedItem.BeginEdit();
-		}
-
-		private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
-		{
-			string path = (string)listView1.FocusedItem.Tag;
-			string nodePath = path.Replace("\\" + listView1.FocusedItem.Text, "");
-			string newName = e.Label.ToString();
-			if (File.Exists(nodePath + "\\" + newName) == false)
-			{
-				client.Rename(path, newName);
-			}
-			DisplayListView(nodePath);
+			//listView1.FocusedItem.BeginEdit();
 		}
 
 		private void toolStripButton1_Click(object sender, EventArgs e)
@@ -670,6 +658,34 @@ namespace strawberry.ui
 				backint = 0;
 				upint = 0;
 			}
+		}
+
+		private void 削除ToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			string filePath = (string)listView1.FocusedItem.Tag;
+			string nodePath = filePath.Replace("\\" + listView1.FocusedItem.Text, "");
+			if (File.Exists(filePath))
+			{
+				client.Delete(filePath);
+			}
+			DisplayListView(nodePath);
+		}
+
+		private void 名前の変更NToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			listView1.FocusedItem.BeginEdit();
+		}
+
+		private void listView1_AfterLabelEdit(object sender, LabelEditEventArgs e)
+		{
+			string path = (string)listView1.FocusedItem.Tag;
+			string nodePath = path.Replace("\\" + listView1.FocusedItem.Text, "");
+			string newName = e.Label.ToString();
+			if (File.Exists(nodePath + "\\" + newName) == false)
+			{
+				client.Rename(path, newName);
+			}
+			DisplayListView(nodePath);
 		}
 	}
 }
