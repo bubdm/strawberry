@@ -39,6 +39,15 @@
 			this.columnHeader4 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader5 = new System.Windows.Forms.ColumnHeader();
 			this.columnHeader6 = new System.Windows.Forms.ColumnHeader();
+			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+			this.編集ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.参照RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+			this.名前の変更NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.コピーCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.貼り付けVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.フォルダの新規作成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.編集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.参照ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -64,22 +73,13 @@
 			this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
-			this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
-			this.編集ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.参照RToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.削除ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-			this.名前の変更NToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.コピーCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.貼り付けVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.フォルダの新規作成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.contextMenuStrip1.SuspendLayout();
 			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
-			this.contextMenuStrip1.SuspendLayout();
 			this.SuspendLayout();
 			// 
 			// treeView1
@@ -89,6 +89,7 @@
 						| System.Windows.Forms.AnchorStyles.Right)));
 			this.treeView1.ImageIndex = 0;
 			this.treeView1.ImageList = this.imageList1;
+			this.treeView1.LabelEdit = true;
 			this.treeView1.Location = new System.Drawing.Point(0, 0);
 			this.treeView1.Name = "treeView1";
 			this.treeView1.SelectedImageIndex = 0;
@@ -156,6 +157,73 @@
 			// 
 			this.columnHeader6.Text = "サイズ(KB)";
 			this.columnHeader6.Width = 90;
+			// 
+			// contextMenuStrip1
+			// 
+			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.編集ToolStripMenuItem1,
+            this.参照RToolStripMenuItem,
+            this.削除ToolStripMenuItem1,
+            this.名前の変更NToolStripMenuItem,
+            this.コピーCToolStripMenuItem,
+            this.貼り付けVToolStripMenuItem,
+            this.フォルダの新規作成ToolStripMenuItem,
+            this.属性PToolStripMenuItem});
+			this.contextMenuStrip1.Name = "contextMenuStrip1";
+			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 202);
+			// 
+			// 編集ToolStripMenuItem1
+			// 
+			this.編集ToolStripMenuItem1.Name = "編集ToolStripMenuItem1";
+			this.編集ToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+			this.編集ToolStripMenuItem1.Text = "編集(E)";
+			this.編集ToolStripMenuItem1.Click += new System.EventHandler(this.編集ToolStripMenuItem1_Click);
+			// 
+			// 参照RToolStripMenuItem
+			// 
+			this.参照RToolStripMenuItem.Name = "参照RToolStripMenuItem";
+			this.参照RToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.参照RToolStripMenuItem.Text = "参照(R)";
+			// 
+			// 削除ToolStripMenuItem1
+			// 
+			this.削除ToolStripMenuItem1.Name = "削除ToolStripMenuItem1";
+			this.削除ToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
+			this.削除ToolStripMenuItem1.Text = "削除(D)";
+			this.削除ToolStripMenuItem1.Click += new System.EventHandler(this.削除ToolStripMenuItem1_Click);
+			// 
+			// 名前の変更NToolStripMenuItem
+			// 
+			this.名前の変更NToolStripMenuItem.Name = "名前の変更NToolStripMenuItem";
+			this.名前の変更NToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.名前の変更NToolStripMenuItem.Text = "名前の変更(N)";
+			this.名前の変更NToolStripMenuItem.Click += new System.EventHandler(this.名前の変更NToolStripMenuItem_Click);
+			// 
+			// コピーCToolStripMenuItem
+			// 
+			this.コピーCToolStripMenuItem.Name = "コピーCToolStripMenuItem";
+			this.コピーCToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.コピーCToolStripMenuItem.Text = "コピー(C)";
+			this.コピーCToolStripMenuItem.Click += new System.EventHandler(this.コピーCToolStripMenuItem_Click);
+			// 
+			// 貼り付けVToolStripMenuItem
+			// 
+			this.貼り付けVToolStripMenuItem.Name = "貼り付けVToolStripMenuItem";
+			this.貼り付けVToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.貼り付けVToolStripMenuItem.Text = "貼り付け(V)";
+			this.貼り付けVToolStripMenuItem.Click += new System.EventHandler(this.貼り付けVToolStripMenuItem_Click);
+			// 
+			// フォルダの新規作成ToolStripMenuItem
+			// 
+			this.フォルダの新規作成ToolStripMenuItem.Name = "フォルダの新規作成ToolStripMenuItem";
+			this.フォルダの新規作成ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.フォルダの新規作成ToolStripMenuItem.Text = "フォルダの新規作成";
+			// 
+			// 属性PToolStripMenuItem
+			// 
+			this.属性PToolStripMenuItem.Name = "属性PToolStripMenuItem";
+			this.属性PToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
+			this.属性PToolStripMenuItem.Text = "属性(P)";
 			// 
 			// menuStrip1
 			// 
@@ -369,70 +437,6 @@
 			this.toolStripStatusLabel6.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
 			// 
-			// contextMenuStrip1
-			// 
-			this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.編集ToolStripMenuItem1,
-            this.参照RToolStripMenuItem,
-            this.削除ToolStripMenuItem1,
-            this.名前の変更NToolStripMenuItem,
-            this.コピーCToolStripMenuItem,
-            this.貼り付けVToolStripMenuItem,
-            this.フォルダの新規作成ToolStripMenuItem,
-            this.属性PToolStripMenuItem});
-			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 202);
-			// 
-			// 編集ToolStripMenuItem1
-			// 
-			this.編集ToolStripMenuItem1.Name = "編集ToolStripMenuItem1";
-			this.編集ToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
-			this.編集ToolStripMenuItem1.Text = "編集(E)";
-			// 
-			// 参照RToolStripMenuItem
-			// 
-			this.参照RToolStripMenuItem.Name = "参照RToolStripMenuItem";
-			this.参照RToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-			this.参照RToolStripMenuItem.Text = "参照(R)";
-			// 
-			// 削除ToolStripMenuItem1
-			// 
-			this.削除ToolStripMenuItem1.Name = "削除ToolStripMenuItem1";
-			this.削除ToolStripMenuItem1.Size = new System.Drawing.Size(184, 22);
-			this.削除ToolStripMenuItem1.Text = "削除(D)";
-			this.削除ToolStripMenuItem1.Click += new System.EventHandler(this.削除ToolStripMenuItem1_Click);
-			// 
-			// 名前の変更NToolStripMenuItem
-			// 
-			this.名前の変更NToolStripMenuItem.Name = "名前の変更NToolStripMenuItem";
-			this.名前の変更NToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.名前の変更NToolStripMenuItem.Text = "名前の変更(N)";
-			this.名前の変更NToolStripMenuItem.Click += new System.EventHandler(this.名前の変更NToolStripMenuItem_Click);
-			// 
-			// コピーCToolStripMenuItem
-			// 
-			this.コピーCToolStripMenuItem.Name = "コピーCToolStripMenuItem";
-			this.コピーCToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
-			this.コピーCToolStripMenuItem.Text = "コピー(C)";
-			// 
-			// 貼り付けVToolStripMenuItem
-			// 
-			this.貼り付けVToolStripMenuItem.Name = "貼り付けVToolStripMenuItem";
-			this.貼り付けVToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.貼り付けVToolStripMenuItem.Text = "貼り付け(V)";
-			// 
-			// フォルダの新規作成ToolStripMenuItem
-			// 
-			this.フォルダの新規作成ToolStripMenuItem.Name = "フォルダの新規作成ToolStripMenuItem";
-			this.フォルダの新規作成ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.フォルダの新規作成ToolStripMenuItem.Text = "フォルダの新規作成";
-			// 
-			// 属性PToolStripMenuItem
-			// 
-			this.属性PToolStripMenuItem.Name = "属性PToolStripMenuItem";
-			this.属性PToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
-			this.属性PToolStripMenuItem.Text = "属性(P)";
-			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -446,6 +450,7 @@
 			this.Name = "FormMain";
 			this.Text = "FormMain";
 			this.Load += new System.EventHandler(this.FormMain_Load);
+			this.contextMenuStrip1.ResumeLayout(false);
 			this.menuStrip1.ResumeLayout(false);
 			this.menuStrip1.PerformLayout();
 			this.toolStrip1.ResumeLayout(false);
@@ -455,7 +460,6 @@
 			this.splitContainer1.ResumeLayout(false);
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
-			this.contextMenuStrip1.ResumeLayout(false);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 

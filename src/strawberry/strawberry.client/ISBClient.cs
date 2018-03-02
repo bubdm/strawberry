@@ -10,5 +10,8 @@ namespace strawberry.client
 		ISBFile[] List(string fullPath);
 		void Rename(string filePath, string newFilename);
 		void Delete(string filePath);
+		void Open(string filePath);
+		void Copy(string filePath);
+		void Move(string dirPath);
 	}
 }

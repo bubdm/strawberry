@@ -565,7 +565,7 @@ namespace strawberry.ui
 
 		private void 名前の変更ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//listView1.FocusedItem.BeginEdit();
+			
 		}
 
 		private void toolStripButton1_Click(object sender, EventArgs e)
@@ -686,6 +686,25 @@ namespace strawberry.ui
 				client.Rename(path, newName);
 			}
 			DisplayListView(nodePath);
+		}
+
+		private void 編集ToolStripMenuItem1_Click(object sender, EventArgs e)
+		{
+			string path = (string)listView1.FocusedItem.Tag;
+			client.Open(path);
+		}
+
+		private void コピーCToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string filePath = (string)listView1.FocusedItem.Tag;
+			client.Copy(filePath);
+		}
+
+		private void 貼り付けVToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			string dirPath = textBox1.Text;
+			client.Move(dirPath);
+			DisplayListView(dirPath);
 		}
 	}
 }

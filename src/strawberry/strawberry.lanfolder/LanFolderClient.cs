@@ -12,6 +12,7 @@ namespace strawberry.lanfolder
 {
 	public class LanFolderClient : ISBClient
 	{
+		System.Collections.Specialized.StringCollection strcoll = new System.Collections.Specialized.StringCollection();
 		public ISBFile[] List(string fullPath)
 		{
 
@@ -83,6 +84,28 @@ namespace strawberry.lanfolder
 		public void Delete(string filePath)
 		{
 			File.Delete(filePath);
+		}
+
+		public void Open(string filePath)
+		{
+			System.Diagnostics.Process.Start(filePath);
+		}
+
+		public void Copy(string filePath)
+		{
+			strcoll.Add(filePath);
+			Clipboard.SetFileDropList(strcoll);
+		}
+
+		public void Move(string dirPath)
+		{
+			strcoll = Clipboard.GetFileDropList();
+			if (strcoll.Count != 0)
+			{
+				string filePath = strcoll[0];
+				dirPath = Path.Combine(dirPath, Path.GetFileName(filePath));
+				System.IO.File.Copy(filePath, dirPath, true);
+			}
 		}
 	}
 }
