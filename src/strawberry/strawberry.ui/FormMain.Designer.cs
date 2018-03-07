@@ -47,6 +47,10 @@
 			this.コピーCToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.貼り付けVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.フォルダの新規作成ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.txtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.exToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.microsoftVisioDrawingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.フォルダToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.編集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -215,9 +219,43 @@
 			// 
 			// フォルダの新規作成ToolStripMenuItem
 			// 
+			this.フォルダの新規作成ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.txtToolStripMenuItem,
+            this.exToolStripMenuItem,
+            this.microsoftVisioDrawingToolStripMenuItem,
+            this.フォルダToolStripMenuItem});
 			this.フォルダの新規作成ToolStripMenuItem.Name = "フォルダの新規作成ToolStripMenuItem";
 			this.フォルダの新規作成ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
 			this.フォルダの新規作成ToolStripMenuItem.Text = "フォルダの新規作成";
+			//this.フォルダの新規作成ToolStripMenuItem.Click += new System.EventHandler(this.フォルダの新規作成ToolStripMenuItem_Click);
+			// 
+			// txtToolStripMenuItem
+			// 
+			this.txtToolStripMenuItem.Name = "txtToolStripMenuItem";
+			this.txtToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+			this.txtToolStripMenuItem.Text = "txt";
+			this.txtToolStripMenuItem.Click += new System.EventHandler(this.txtToolStripMenuItem_Click);
+			// 
+			// exToolStripMenuItem
+			// 
+			this.exToolStripMenuItem.Name = "exToolStripMenuItem";
+			this.exToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+			this.exToolStripMenuItem.Text = "excle";
+			this.exToolStripMenuItem.Click += new System.EventHandler(this.exToolStripMenuItem_Click);
+			// 
+			// microsoftVisioDrawingToolStripMenuItem
+			// 
+			this.microsoftVisioDrawingToolStripMenuItem.Name = "microsoftVisioDrawingToolStripMenuItem";
+			this.microsoftVisioDrawingToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+			this.microsoftVisioDrawingToolStripMenuItem.Text = "Microsoft Visio Drawing";
+			this.microsoftVisioDrawingToolStripMenuItem.Click += new System.EventHandler(this.microsoftVisioDrawingToolStripMenuItem_Click);
+			// 
+			// フォルダToolStripMenuItem
+			// 
+			this.フォルダToolStripMenuItem.Name = "フォルダToolStripMenuItem";
+			this.フォルダToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+			this.フォルダToolStripMenuItem.Text = "フォルダ";
+			this.フォルダToolStripMenuItem.Click += new System.EventHandler(this.フォルダToolStripMenuItem_Click);
 			// 
 			// 属性PToolStripMenuItem
 			// 
@@ -259,6 +297,7 @@
 			this.新しいフォルダToolStripMenuItem.Name = "新しいフォルダToolStripMenuItem";
 			this.新しいフォルダToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
 			this.新しいフォルダToolStripMenuItem.Text = "新しいフォルダ";
+			this.新しいフォルダToolStripMenuItem.Click += new System.EventHandler(this.新しいフォルダToolStripMenuItem_Click);
 			// 
 			// 削除ToolStripMenuItem
 			// 
@@ -510,6 +549,10 @@
 		private System.Windows.Forms.ToolStripMenuItem 貼り付けVToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem フォルダの新規作成ToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem 属性PToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem txtToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem exToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem microsoftVisioDrawingToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem フォルダToolStripMenuItem;
 	}
 }
 

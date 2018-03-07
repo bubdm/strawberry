@@ -706,5 +706,62 @@ namespace strawberry.ui
 			client.Move(dirPath);
 			DisplayListView(dirPath);
 		}
+
+		private void 新しいフォルダToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CreateFolder();
+		}
+
+		private void txtToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CreateFile("\\新しいテキスト ドキュメント.txt");
+		}
+
+		private void exToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CreateFile("\\新規 Microsoft Excel ワークシート.xlsx");
+		}
+
+		private void microsoftVisioDrawingToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CreateFile("\\新規 Microsoft Visio Drawing.vsd");
+		}
+
+		private void フォルダToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			CreateFolder();
+		}
+
+		private void CreateFile(string fileTyp)
+		{
+			TreeNode node = treeView1.SelectedNode;
+			ISBFile isbFile = node.Tag as ISBFile;
+			string FILE_NAME = isbFile.Path + fileTyp;
+			if (File.Exists(FILE_NAME)) //如果文件存在,则创建File.AppendText对象
+			{
+				//Console.WriteLine("此文件已经存在，无需创建！");
+				//File.AppendText(FILE_NAME);  todo
+			}
+			else   //如果文件不存在,则创建File.CreateText对象
+			{
+				File.CreateText(FILE_NAME);
+			}
+		}
+
+		private void CreateFolder()
+		{
+			TreeNode node = treeView1.SelectedNode;
+			ISBFile isbFile = node.Tag as ISBFile;
+			string Path = isbFile.Path;
+			Path += "\\新しいフォルダ";
+			if (Directory.Exists(Path))
+			{
+				//Console.WriteLine("此文件夹已经存在，无需创建！");
+			}
+			else
+			{
+				Directory.CreateDirectory(Path);
+			}
+		}
 	}
 }
