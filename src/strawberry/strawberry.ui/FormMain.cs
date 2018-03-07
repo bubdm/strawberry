@@ -11,6 +11,7 @@ using System.Xml;
 using System.Collections;
 using strawberry.lanfolder;
 using strawberry.client;
+using Microsoft.VisualBasic;
 
 namespace strawberry.ui
 {
@@ -460,13 +461,10 @@ namespace strawberry.ui
 
 		private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			//string filePath = (string)listView1.FocusedItem.Tag;
-			//string nodePath = filePath.Replace("\\" + listView1.FocusedItem.Text, "");
-			//if (File.Exists(filePath))
-			//{
-			//    client.Delete(filePath);
-			//}
-			//DisplayListView(nodePath);
+			TreeNode node = treeView1.SelectedNode;
+			ISBFile isbFile = node.Tag as ISBFile;
+			node.Remove();
+			client.Delete(isbFile.Path);
 		}
 
 		// 返回选中节点的完整路径
@@ -727,11 +725,6 @@ namespace strawberry.ui
 			CreateFile("\\新規 Microsoft Visio Drawing.vsd");
 		}
 
-		private void フォルダToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			CreateFolder();
-		}
-
 		private void CreateFile(string fileTyp)
 		{
 			TreeNode node = treeView1.SelectedNode;
@@ -745,6 +738,7 @@ namespace strawberry.ui
 			else   //如果文件不存在,则创建File.CreateText对象
 			{
 				File.CreateText(FILE_NAME);
+				DisplayListView(isbFile.Path);
 			}
 		}
 
@@ -753,14 +747,17 @@ namespace strawberry.ui
 			TreeNode node = treeView1.SelectedNode;
 			ISBFile isbFile = node.Tag as ISBFile;
 			string Path = isbFile.Path;
-			Path += "\\新しいフォルダ";
+			string str = Interaction.InputBox("名前を入力してください", "新しいフォルダ", "新しいフォルダ", -1, -1);
+			Path = Path + "\\" + str;
 			if (Directory.Exists(Path))
 			{
-				//Console.WriteLine("此文件夹已经存在，无需创建！");
+				MessageBox.Show("此文件夹已经存在，无需创建！");
 			}
 			else
 			{
 				Directory.CreateDirectory(Path);
+				node.Nodes.Clear();
+				PaintTreeView(node, textBox1.Text);
 			}
 		}
 	}

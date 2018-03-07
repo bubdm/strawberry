@@ -50,7 +50,6 @@
 			this.txtToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.exToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.microsoftVisioDrawingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.フォルダToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
 			this.編集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -222,12 +221,10 @@
 			this.フォルダの新規作成ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.txtToolStripMenuItem,
             this.exToolStripMenuItem,
-            this.microsoftVisioDrawingToolStripMenuItem,
-            this.フォルダToolStripMenuItem});
+            this.microsoftVisioDrawingToolStripMenuItem});
 			this.フォルダの新規作成ToolStripMenuItem.Name = "フォルダの新規作成ToolStripMenuItem";
 			this.フォルダの新規作成ToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
 			this.フォルダの新規作成ToolStripMenuItem.Text = "フォルダの新規作成";
-			//this.フォルダの新規作成ToolStripMenuItem.Click += new System.EventHandler(this.フォルダの新規作成ToolStripMenuItem_Click);
 			// 
 			// txtToolStripMenuItem
 			// 
@@ -249,13 +246,6 @@
 			this.microsoftVisioDrawingToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
 			this.microsoftVisioDrawingToolStripMenuItem.Text = "Microsoft Visio Drawing";
 			this.microsoftVisioDrawingToolStripMenuItem.Click += new System.EventHandler(this.microsoftVisioDrawingToolStripMenuItem_Click);
-			// 
-			// フォルダToolStripMenuItem
-			// 
-			this.フォルダToolStripMenuItem.Name = "フォルダToolStripMenuItem";
-			this.フォルダToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
-			this.フォルダToolStripMenuItem.Text = "フォルダ";
-			this.フォルダToolStripMenuItem.Click += new System.EventHandler(this.フォルダToolStripMenuItem_Click);
 			// 
 			// 属性PToolStripMenuItem
 			// 
@@ -552,7 +542,6 @@
 		private System.Windows.Forms.ToolStripMenuItem txtToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem microsoftVisioDrawingToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem フォルダToolStripMenuItem;
 	}
 }
 

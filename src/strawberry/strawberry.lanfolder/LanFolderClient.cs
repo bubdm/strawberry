@@ -81,9 +81,17 @@ namespace strawberry.lanfolder
 			MyComputer.FileSystem.RenameFile(filePath, newFilename);
 		}
 
-		public void Delete(string filePath)
+		public void Delete(string path)
 		{
-			File.Delete(filePath);
+			FileAttributes attr = File.GetAttributes(path);
+			if (attr == FileAttributes.Directory)
+			{
+				Directory.Delete(path, true);
+			}
+			else
+			{
+				File.Delete(path);
+			}
 		}
 
 		public void Open(string filePath)
