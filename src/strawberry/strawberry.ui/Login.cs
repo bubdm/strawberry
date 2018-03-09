@@ -8,10 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using System.Xml;
 using System.Xml.Linq;
-using System.Xml.Schema;
-using System.Xml.Serialization;
-using System.Xml.XPath;
-using System.Xml.Xsl;
 
 namespace strawberry.ui
 {
