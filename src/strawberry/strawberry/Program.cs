@@ -15,7 +15,16 @@ namespace strawberry
 		{
 			Application.EnableVisualStyles();
 			Application.SetCompatibleTextRenderingDefault(false);
-			Application.Run(new Login());
+			Login ln = new Login();
+			ln.ShowDialog();
+			if (ln.DialogResult == DialogResult.OK)
+			{
+				Application.Run(new FormMain());
+			}
+			else
+			{
+				return;
+			}
 		}
 	}
 }

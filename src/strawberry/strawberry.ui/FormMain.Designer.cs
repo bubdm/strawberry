@@ -477,6 +477,7 @@
 			this.Controls.Add(this.splitContainer1);
 			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "FormMain";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormMain";
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.contextMenuStrip1.ResumeLayout(false);
