@@ -29,6 +29,7 @@
 		private void InitializeComponent()
 		{
 			this.components = new System.ComponentModel.Container();
+			System.Windows.Forms.ToolStripButton EditButton;
 			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormMain));
 			this.treeView1 = new System.Windows.Forms.TreeView();
 			this.imageList1 = new System.Windows.Forms.ImageList(this.components);
@@ -51,16 +52,6 @@
 			this.exToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.microsoftVisioDrawingToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.属性PToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-			this.編集ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.参照ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.新しいフォルダToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.削除ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.設定ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.名前の変更ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.模式切换ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.详细模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-			this.图标模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
 			this.toolStrip1 = new System.Windows.Forms.ToolStrip();
 			this.toolStripButton1 = new System.Windows.Forms.ToolStripButton();
 			this.toolStripButton2 = new System.Windows.Forms.ToolStripButton();
@@ -76,14 +67,36 @@
 			this.toolStripStatusLabel4 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel5 = new System.Windows.Forms.ToolStripStatusLabel();
 			this.toolStripStatusLabel6 = new System.Windows.Forms.ToolStripStatusLabel();
+			this.toolStrip2 = new System.Windows.Forms.ToolStrip();
+			this.ReferenceButton = new System.Windows.Forms.ToolStripButton();
+			this.NewFolderButton = new System.Windows.Forms.ToolStripButton();
+			this.DeleteButton = new System.Windows.Forms.ToolStripButton();
+			this.RenameButton = new System.Windows.Forms.ToolStripButton();
+			this.toolStrip3 = new System.Windows.Forms.ToolStrip();
+			this.SettingButton = new System.Windows.Forms.ToolStripButton();
+			this.ModeSwitchButton = new System.Windows.Forms.ToolStripDropDownButton();
+			this.详细模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			this.图表模式ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+			EditButton = new System.Windows.Forms.ToolStripButton();
 			this.contextMenuStrip1.SuspendLayout();
-			this.menuStrip1.SuspendLayout();
 			this.toolStrip1.SuspendLayout();
 			this.splitContainer1.Panel1.SuspendLayout();
 			this.splitContainer1.Panel2.SuspendLayout();
 			this.splitContainer1.SuspendLayout();
 			this.statusStrip1.SuspendLayout();
+			this.toolStrip2.SuspendLayout();
+			this.toolStrip3.SuspendLayout();
 			this.SuspendLayout();
+			// 
+			// EditButton
+			// 
+			EditButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			EditButton.Image = ((System.Drawing.Image)(resources.GetObject("EditButton.Image")));
+			EditButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			EditButton.Name = "EditButton";
+			EditButton.Size = new System.Drawing.Size(36, 22);
+			EditButton.Text = "編集";
+			EditButton.Click += new System.EventHandler(this.EditButton_Click);
 			// 
 			// treeView1
 			// 
@@ -96,7 +109,7 @@
 			this.treeView1.Location = new System.Drawing.Point(0, 0);
 			this.treeView1.Name = "treeView1";
 			this.treeView1.SelectedImageIndex = 0;
-			this.treeView1.Size = new System.Drawing.Size(204, 334);
+			this.treeView1.Size = new System.Drawing.Size(281, 452);
 			this.treeView1.TabIndex = 0;
 			this.treeView1.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.treeView1_AfterSelect);
 			// 
@@ -122,9 +135,9 @@
 			this.listView1.FullRowSelect = true;
 			this.listView1.HideSelection = false;
 			this.listView1.LabelEdit = true;
-			this.listView1.Location = new System.Drawing.Point(0, 0);
+			this.listView1.Location = new System.Drawing.Point(-1, 0);
 			this.listView1.Name = "listView1";
-			this.listView1.Size = new System.Drawing.Size(518, 334);
+			this.listView1.Size = new System.Drawing.Size(722, 452);
 			this.listView1.TabIndex = 1;
 			this.listView1.UseCompatibleStateImageBehavior = false;
 			this.listView1.View = System.Windows.Forms.View.Details;
@@ -135,7 +148,7 @@
 			// columnHeader1
 			// 
 			this.columnHeader1.Text = "名前";
-			this.columnHeader1.Width = 90;
+			this.columnHeader1.Width = 150;
 			// 
 			// columnHeader2
 			// 
@@ -173,7 +186,7 @@
             this.フォルダの新規作成ToolStripMenuItem,
             this.属性PToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 202);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 180);
 			// 
 			// 編集ToolStripMenuItem1
 			// 
@@ -253,85 +266,6 @@
 			this.属性PToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
 			this.属性PToolStripMenuItem.Text = "属性(P)";
 			// 
-			// menuStrip1
-			// 
-			this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
-			this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.編集ToolStripMenuItem,
-            this.参照ToolStripMenuItem,
-            this.新しいフォルダToolStripMenuItem,
-            this.削除ToolStripMenuItem,
-            this.設定ToolStripMenuItem,
-            this.名前の変更ToolStripMenuItem,
-            this.模式切换ToolStripMenuItem});
-			this.menuStrip1.Location = new System.Drawing.Point(4, 23);
-			this.menuStrip1.Name = "menuStrip1";
-			this.menuStrip1.Size = new System.Drawing.Size(436, 26);
-			this.menuStrip1.TabIndex = 8;
-			this.menuStrip1.Text = "menuStrip1";
-			// 
-			// 編集ToolStripMenuItem
-			// 
-			this.編集ToolStripMenuItem.Name = "編集ToolStripMenuItem";
-			this.編集ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
-			this.編集ToolStripMenuItem.Text = "編集";
-			// 
-			// 参照ToolStripMenuItem
-			// 
-			this.参照ToolStripMenuItem.Name = "参照ToolStripMenuItem";
-			this.参照ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
-			this.参照ToolStripMenuItem.Text = "参照";
-			// 
-			// 新しいフォルダToolStripMenuItem
-			// 
-			this.新しいフォルダToolStripMenuItem.Name = "新しいフォルダToolStripMenuItem";
-			this.新しいフォルダToolStripMenuItem.Size = new System.Drawing.Size(104, 22);
-			this.新しいフォルダToolStripMenuItem.Text = "新しいフォルダ";
-			this.新しいフォルダToolStripMenuItem.Click += new System.EventHandler(this.新しいフォルダToolStripMenuItem_Click);
-			// 
-			// 削除ToolStripMenuItem
-			// 
-			this.削除ToolStripMenuItem.Name = "削除ToolStripMenuItem";
-			this.削除ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
-			this.削除ToolStripMenuItem.Text = "削除";
-			this.削除ToolStripMenuItem.Click += new System.EventHandler(this.削除ToolStripMenuItem_Click);
-			// 
-			// 設定ToolStripMenuItem
-			// 
-			this.設定ToolStripMenuItem.Name = "設定ToolStripMenuItem";
-			this.設定ToolStripMenuItem.Size = new System.Drawing.Size(44, 22);
-			this.設定ToolStripMenuItem.Text = "設定";
-			// 
-			// 名前の変更ToolStripMenuItem
-			// 
-			this.名前の変更ToolStripMenuItem.Name = "名前の変更ToolStripMenuItem";
-			this.名前の変更ToolStripMenuItem.Size = new System.Drawing.Size(80, 22);
-			this.名前の変更ToolStripMenuItem.Text = "名前の変更";
-			this.名前の変更ToolStripMenuItem.Click += new System.EventHandler(this.名前の変更ToolStripMenuItem_Click);
-			// 
-			// 模式切换ToolStripMenuItem
-			// 
-			this.模式切换ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.详细模式ToolStripMenuItem,
-            this.图标模式ToolStripMenuItem});
-			this.模式切换ToolStripMenuItem.Name = "模式切换ToolStripMenuItem";
-			this.模式切换ToolStripMenuItem.Size = new System.Drawing.Size(68, 22);
-			this.模式切换ToolStripMenuItem.Text = "模式切换";
-			// 
-			// 详细模式ToolStripMenuItem
-			// 
-			this.详细模式ToolStripMenuItem.Name = "详细模式ToolStripMenuItem";
-			this.详细模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-			this.详细模式ToolStripMenuItem.Text = "详细模式";
-			this.详细模式ToolStripMenuItem.Click += new System.EventHandler(this.详细模式ToolStripMenuItem_Click);
-			// 
-			// 图标模式ToolStripMenuItem
-			// 
-			this.图标模式ToolStripMenuItem.Name = "图标模式ToolStripMenuItem";
-			this.图标模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
-			this.图标模式ToolStripMenuItem.Text = "图标模式";
-			this.图标模式ToolStripMenuItem.Click += new System.EventHandler(this.图标模式ToolStripMenuItem_Click);
-			// 
 			// toolStrip1
 			// 
 			this.toolStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -343,7 +277,7 @@
             this.keySearch_button});
 			this.toolStrip1.Location = new System.Drawing.Point(0, 0);
 			this.toolStrip1.Name = "toolStrip1";
-			this.toolStrip1.Size = new System.Drawing.Size(735, 25);
+			this.toolStrip1.Size = new System.Drawing.Size(1013, 25);
 			this.toolStrip1.TabIndex = 9;
 			this.toolStrip1.Text = "toolStrip1";
 			// 
@@ -370,7 +304,7 @@
 			// textBox1
 			// 
 			this.textBox1.Name = "textBox1";
-			this.textBox1.Size = new System.Drawing.Size(412, 25);
+			this.textBox1.Size = new System.Drawing.Size(650, 25);
 			this.textBox1.KeyUp += new System.Windows.Forms.KeyEventHandler(this.textBox1_KeyUp);
 			// 
 			// refresh_button
@@ -386,7 +320,7 @@
 			// search_textBox
 			// 
 			this.search_textBox.Name = "search_textBox";
-			this.search_textBox.Size = new System.Drawing.Size(200, 25);
+			this.search_textBox.Size = new System.Drawing.Size(250, 25);
 			this.search_textBox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.search_textBox_KeyUp);
 			// 
 			// keySearch_button
@@ -411,8 +345,8 @@
 			// splitContainer1.Panel2
 			// 
 			this.splitContainer1.Panel2.Controls.Add(this.listView1);
-			this.splitContainer1.Size = new System.Drawing.Size(728, 334);
-			this.splitContainer1.SplitterDistance = 206;
+			this.splitContainer1.Size = new System.Drawing.Size(1009, 452);
+			this.splitContainer1.SplitterDistance = 284;
 			this.splitContainer1.TabIndex = 10;
 			// 
 			// statusStrip1
@@ -424,9 +358,9 @@
             this.toolStripStatusLabel4,
             this.toolStripStatusLabel5,
             this.toolStripStatusLabel6});
-			this.statusStrip1.Location = new System.Drawing.Point(0, 390);
+			this.statusStrip1.Location = new System.Drawing.Point(0, 507);
 			this.statusStrip1.Name = "statusStrip1";
-			this.statusStrip1.Size = new System.Drawing.Size(735, 23);
+			this.statusStrip1.Size = new System.Drawing.Size(1013, 23);
 			this.statusStrip1.TabIndex = 11;
 			this.statusStrip1.Text = "statusStrip1";
 			// 
@@ -466,23 +400,125 @@
 			this.toolStripStatusLabel6.Size = new System.Drawing.Size(134, 18);
 			this.toolStripStatusLabel6.Text = "toolStripStatusLabel6";
 			// 
+			// toolStrip2
+			// 
+			this.toolStrip2.Dock = System.Windows.Forms.DockStyle.None;
+			this.toolStrip2.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            EditButton,
+            this.ReferenceButton,
+            this.NewFolderButton,
+            this.DeleteButton,
+            this.RenameButton});
+			this.toolStrip2.Location = new System.Drawing.Point(0, 25);
+			this.toolStrip2.Name = "toolStrip2";
+			this.toolStrip2.Size = new System.Drawing.Size(288, 25);
+			this.toolStrip2.TabIndex = 12;
+			this.toolStrip2.Text = "toolStrip2";
+			// 
+			// ReferenceButton
+			// 
+			this.ReferenceButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.ReferenceButton.Image = ((System.Drawing.Image)(resources.GetObject("ReferenceButton.Image")));
+			this.ReferenceButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ReferenceButton.Name = "ReferenceButton";
+			this.ReferenceButton.Size = new System.Drawing.Size(36, 22);
+			this.ReferenceButton.Text = "参照";
+			this.ReferenceButton.Click += new System.EventHandler(this.ReferenceButton_Click);
+			// 
+			// NewFolderButton
+			// 
+			this.NewFolderButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.NewFolderButton.Image = ((System.Drawing.Image)(resources.GetObject("NewFolderButton.Image")));
+			this.NewFolderButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.NewFolderButton.Name = "NewFolderButton";
+			this.NewFolderButton.Size = new System.Drawing.Size(96, 22);
+			this.NewFolderButton.Text = "新しいフォルダ";
+			this.NewFolderButton.Click += new System.EventHandler(this.NewFolderButton_Click);
+			// 
+			// DeleteButton
+			// 
+			this.DeleteButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.DeleteButton.Image = ((System.Drawing.Image)(resources.GetObject("DeleteButton.Image")));
+			this.DeleteButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.DeleteButton.Name = "DeleteButton";
+			this.DeleteButton.Size = new System.Drawing.Size(36, 22);
+			this.DeleteButton.Text = "削除";
+			this.DeleteButton.Click += new System.EventHandler(this.DeleteButton_Click);
+			// 
+			// RenameButton
+			// 
+			this.RenameButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.RenameButton.Image = ((System.Drawing.Image)(resources.GetObject("RenameButton.Image")));
+			this.RenameButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.RenameButton.Name = "RenameButton";
+			this.RenameButton.Size = new System.Drawing.Size(72, 22);
+			this.RenameButton.Text = "名前の変更";
+			this.RenameButton.Click += new System.EventHandler(this.RenameButton_Click);
+			// 
+			// toolStrip3
+			// 
+			this.toolStrip3.Dock = System.Windows.Forms.DockStyle.None;
+			this.toolStrip3.GripStyle = System.Windows.Forms.ToolStripGripStyle.Hidden;
+			this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.SettingButton,
+            this.ModeSwitchButton});
+			this.toolStrip3.Location = new System.Drawing.Point(865, 25);
+			this.toolStrip3.Name = "toolStrip3";
+			this.toolStrip3.Size = new System.Drawing.Size(139, 25);
+			this.toolStrip3.TabIndex = 13;
+			this.toolStrip3.Text = "toolStrip3";
+			// 
+			// SettingButton
+			// 
+			this.SettingButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.SettingButton.Image = ((System.Drawing.Image)(resources.GetObject("SettingButton.Image")));
+			this.SettingButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.SettingButton.Name = "SettingButton";
+			this.SettingButton.Size = new System.Drawing.Size(36, 22);
+			this.SettingButton.Text = "設定";
+			this.SettingButton.Click += new System.EventHandler(this.SettingButton_Click);
+			// 
+			// ModeSwitchButton
+			// 
+			this.ModeSwitchButton.DisplayStyle = System.Windows.Forms.ToolStripItemDisplayStyle.Text;
+			this.ModeSwitchButton.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.详细模式ToolStripMenuItem,
+            this.图表模式ToolStripMenuItem});
+			this.ModeSwitchButton.Image = ((System.Drawing.Image)(resources.GetObject("ModeSwitchButton.Image")));
+			this.ModeSwitchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
+			this.ModeSwitchButton.Name = "ModeSwitchButton";
+			this.ModeSwitchButton.Size = new System.Drawing.Size(69, 22);
+			this.ModeSwitchButton.Text = "模式切换";
+			// 
+			// 详细模式ToolStripMenuItem
+			// 
+			this.详细模式ToolStripMenuItem.Name = "详细模式ToolStripMenuItem";
+			this.详细模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.详细模式ToolStripMenuItem.Text = "详细模式";
+			this.详细模式ToolStripMenuItem.Click += new System.EventHandler(this.详细模式ToolStripMenuItem_Click_1);
+			// 
+			// 图表模式ToolStripMenuItem
+			// 
+			this.图表模式ToolStripMenuItem.Name = "图表模式ToolStripMenuItem";
+			this.图表模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.图表模式ToolStripMenuItem.Text = "图标模式";
+			this.图表模式ToolStripMenuItem.Click += new System.EventHandler(this.图标模式ToolStripMenuItem_Click);
+			// 
 			// FormMain
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-			this.ClientSize = new System.Drawing.Size(735, 413);
+			this.ClientSize = new System.Drawing.Size(1013, 530);
+			this.Controls.Add(this.toolStrip2);
 			this.Controls.Add(this.statusStrip1);
+			this.Controls.Add(this.toolStrip3);
 			this.Controls.Add(this.toolStrip1);
-			this.Controls.Add(this.menuStrip1);
 			this.Controls.Add(this.splitContainer1);
-			this.MainMenuStrip = this.menuStrip1;
 			this.Name = "FormMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormMain";
 			this.Load += new System.EventHandler(this.FormMain_Load);
 			this.contextMenuStrip1.ResumeLayout(false);
-			this.menuStrip1.ResumeLayout(false);
-			this.menuStrip1.PerformLayout();
 			this.toolStrip1.ResumeLayout(false);
 			this.toolStrip1.PerformLayout();
 			this.splitContainer1.Panel1.ResumeLayout(false);
@@ -490,6 +526,10 @@
 			this.splitContainer1.ResumeLayout(false);
 			this.statusStrip1.ResumeLayout(false);
 			this.statusStrip1.PerformLayout();
+			this.toolStrip2.ResumeLayout(false);
+			this.toolStrip2.PerformLayout();
+			this.toolStrip3.ResumeLayout(false);
+			this.toolStrip3.PerformLayout();
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -505,15 +545,7 @@
 		private System.Windows.Forms.ColumnHeader columnHeader4;
 		private System.Windows.Forms.ColumnHeader columnHeader5;
 		private System.Windows.Forms.ColumnHeader columnHeader6;
-		private System.Windows.Forms.MenuStrip menuStrip1;
-		private System.Windows.Forms.ToolStripMenuItem 編集ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 参照ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 新しいフォルダToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 削除ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 設定ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 名前の変更ToolStripMenuItem;
 		private System.Windows.Forms.ToolStrip toolStrip1;
-		private System.Windows.Forms.ToolStripButton toolStripButton1;
 		private System.Windows.Forms.ToolStripButton toolStripButton2;
 		private System.Windows.Forms.ToolStripTextBox textBox1;
 		private System.Windows.Forms.ToolStripButton refresh_button;
@@ -521,9 +553,6 @@
 		private System.Windows.Forms.ToolStripButton keySearch_button;
 		private System.Windows.Forms.SplitContainer splitContainer1;
 		private System.Windows.Forms.ImageList imageList1;
-		private System.Windows.Forms.ToolStripMenuItem 模式切换ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 详细模式ToolStripMenuItem;
-		private System.Windows.Forms.ToolStripMenuItem 图标模式ToolStripMenuItem;
 		private System.Windows.Forms.StatusStrip statusStrip1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
 		private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel2;
@@ -543,6 +572,17 @@
 		private System.Windows.Forms.ToolStripMenuItem txtToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem exToolStripMenuItem;
 		private System.Windows.Forms.ToolStripMenuItem microsoftVisioDrawingToolStripMenuItem;
+		private System.Windows.Forms.ToolStripButton toolStripButton1;
+		private System.Windows.Forms.ToolStrip toolStrip2;
+		private System.Windows.Forms.ToolStripButton ReferenceButton;
+		private System.Windows.Forms.ToolStripButton NewFolderButton;
+		private System.Windows.Forms.ToolStripButton DeleteButton;
+		private System.Windows.Forms.ToolStripButton RenameButton;
+		private System.Windows.Forms.ToolStrip toolStrip3;
+		private System.Windows.Forms.ToolStripButton SettingButton;
+		private System.Windows.Forms.ToolStripDropDownButton ModeSwitchButton;
+		private System.Windows.Forms.ToolStripMenuItem 详细模式ToolStripMenuItem;
+		private System.Windows.Forms.ToolStripMenuItem 图表模式ToolStripMenuItem;
 	}
 }
 

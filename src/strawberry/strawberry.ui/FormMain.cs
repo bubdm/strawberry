@@ -459,14 +459,6 @@ namespace strawberry.ui
 			}
 		}
 
-		private void 削除ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			TreeNode node = treeView1.SelectedNode;
-			ISBFile isbFile = node.Tag as ISBFile;
-			node.Remove();
-			client.Delete(isbFile.Path);
-		}
-
 		// 返回选中节点的完整路径
 		private string selectNodePath(TreeView treeview, TreeNode node1)
 		{
@@ -521,16 +513,6 @@ namespace strawberry.ui
 
 		}
 
-		private void 详细模式ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			listView1.View = View.Details;
-		}
-
-		private void 图标模式ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			listView1.View = View.LargeIcon;
-		}
-
 		private void listViewItem_Selected(object sender, EventArgs e)
 		{
 			if (listView1.SelectedItems.Count == 0)
@@ -559,11 +541,6 @@ namespace strawberry.ui
 				toolStripStatusLabel6.Text = "サイズ：" + listView1.SelectedItems[0].SubItems[5].Text + "KB";
 			}
 
-		}
-
-		private void 名前の変更ToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			
 		}
 
 		private void toolStripButton1_Click(object sender, EventArgs e)
@@ -705,11 +682,6 @@ namespace strawberry.ui
 			DisplayListView(dirPath);
 		}
 
-		private void 新しいフォルダToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			CreateFolder();
-		}
-
 		private void txtToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			CreateFile("\\新しいテキスト ドキュメント.txt");
@@ -759,6 +731,49 @@ namespace strawberry.ui
 				node.Nodes.Clear();
 				PaintTreeView(node, textBox1.Text);
 			}
+		}
+
+		private void EditButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void ReferenceButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void NewFolderButton_Click(object sender, EventArgs e)
+		{
+			CreateFolder();
+		}
+
+		private void DeleteButton_Click(object sender, EventArgs e)
+		{
+			TreeNode node = treeView1.SelectedNode;
+			ISBFile isbFile = node.Tag as ISBFile;
+			node.Remove();
+			client.Delete(isbFile.Path);
+		}
+
+		private void RenameButton_Click(object sender, EventArgs e)
+		{
+
+		}
+
+		private void 详细模式ToolStripMenuItem_Click_1(object sender, EventArgs e)
+		{
+			listView1.View = View.Details;
+		}
+
+		private void 图标模式ToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			listView1.View = View.LargeIcon;
+		}
+
+		private void SettingButton_Click(object sender, EventArgs e)
+		{
+
 		}
 	}
 }
