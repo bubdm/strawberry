@@ -185,7 +185,7 @@
             this.フォルダの新規作成ToolStripMenuItem,
             this.属性PToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 180);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 202);
 			// 
 			// 編集ToolStripMenuItem1
 			// 
@@ -199,6 +199,7 @@
 			this.参照RToolStripMenuItem.Name = "参照RToolStripMenuItem";
 			this.参照RToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
 			this.参照RToolStripMenuItem.Text = "参照(R)";
+			this.参照RToolStripMenuItem.Click += new System.EventHandler(this.参照RToolStripMenuItem_Click);
 			// 
 			// 削除ToolStripMenuItem1
 			// 

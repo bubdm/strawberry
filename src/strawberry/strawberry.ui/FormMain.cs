@@ -789,5 +789,15 @@ namespace strawberry.ui
 		{
 
 		}
+
+		private void 参照RToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (listView1.SelectedItems.Count > 0)
+			{
+				string path = (string)listView1.FocusedItem.Tag;
+				File.SetAttributes(path,FileAttributes.ReadOnly);
+				client.Open(path);
+			}
+		}
 	}
 }
