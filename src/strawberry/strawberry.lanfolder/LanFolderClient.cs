@@ -101,6 +101,7 @@ namespace strawberry.lanfolder
 
 		public void Copy(string filePath)
 		{
+			strcoll.Clear();
 			strcoll.Add(filePath);
 			Clipboard.SetFileDropList(strcoll);
 		}
@@ -112,7 +113,17 @@ namespace strawberry.lanfolder
 			{
 				string filePath = strcoll[0];
 				dirPath = Path.Combine(dirPath, Path.GetFileName(filePath));
-				System.IO.File.Copy(filePath, dirPath, true);
+				if (filePath != dirPath)
+				{
+					System.IO.File.Copy(filePath, dirPath, true);
+				}
+				else
+				{
+					string extension = System.IO.Path.GetExtension(filePath);
+					string path = filePath.Replace(filePath.Substring(filePath.IndexOf(".")), "");
+					dirPath = path + "1" + extension;
+					System.IO.File.Copy(filePath, dirPath, true);
+				}
 			}
 		}
 	}

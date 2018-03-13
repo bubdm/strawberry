@@ -133,7 +133,6 @@
             this.columnHeader6});
 			this.listView1.ContextMenuStrip = this.contextMenuStrip1;
 			this.listView1.FullRowSelect = true;
-			this.listView1.HideSelection = false;
 			this.listView1.LabelEdit = true;
 			this.listView1.Location = new System.Drawing.Point(-1, 0);
 			this.listView1.Name = "listView1";
@@ -462,9 +461,9 @@
 			this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SettingButton,
             this.ModeSwitchButton});
-			this.toolStrip3.Location = new System.Drawing.Point(865, 25);
+			this.toolStrip3.Location = new System.Drawing.Point(874, 25);
 			this.toolStrip3.Name = "toolStrip3";
-			this.toolStrip3.Size = new System.Drawing.Size(139, 25);
+			this.toolStrip3.Size = new System.Drawing.Size(108, 25);
 			this.toolStrip3.TabIndex = 13;
 			this.toolStrip3.Text = "toolStrip3";
 			// 
@@ -511,9 +510,9 @@
 			this.ClientSize = new System.Drawing.Size(1013, 530);
 			this.Controls.Add(this.toolStrip2);
 			this.Controls.Add(this.statusStrip1);
-			this.Controls.Add(this.toolStrip3);
 			this.Controls.Add(this.toolStrip1);
 			this.Controls.Add(this.splitContainer1);
+			this.Controls.Add(this.toolStrip3);
 			this.Name = "FormMain";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "FormMain";

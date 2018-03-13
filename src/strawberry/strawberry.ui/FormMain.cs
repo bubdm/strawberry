@@ -44,6 +44,7 @@ namespace strawberry.ui
 		int upint = 0;
 		bool backupbool = false;
 		TreeNode CurrentNode;
+		int xPos, yPos;
 
 		private Dictionary<int, string> dicIndex = new Dictionary<int, string>();
 
@@ -637,13 +638,16 @@ namespace strawberry.ui
 
 		private void 削除ToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
-			string filePath = (string)listView1.FocusedItem.Tag;
-			string nodePath = filePath.Replace("\\" + listView1.FocusedItem.Text, "");
-			if (File.Exists(filePath))
+			if (listView1.SelectedItems.Count > 0)
 			{
-				client.Delete(filePath);
+				string filePath = (string)listView1.FocusedItem.Tag;
+				string nodePath = filePath.Replace("\\" + listView1.FocusedItem.Text, "");
+				if (File.Exists(filePath))
+				{
+					client.Delete(filePath);
+				}
+				DisplayListView(nodePath);
 			}
-			DisplayListView(nodePath);
 		}
 
 		private void 名前の変更NToolStripMenuItem_Click(object sender, EventArgs e)
@@ -665,14 +669,20 @@ namespace strawberry.ui
 
 		private void 編集ToolStripMenuItem1_Click(object sender, EventArgs e)
 		{
-			string path = (string)listView1.FocusedItem.Tag;
-			client.Open(path);
+			if (listView1.SelectedItems.Count > 0)
+			{
+				string path = (string)listView1.FocusedItem.Tag;
+				client.Open(path);
+			}
 		}
 
 		private void コピーCToolStripMenuItem_Click(object sender, EventArgs e)
 		{
-			string filePath = (string)listView1.FocusedItem.Tag;
-			client.Copy(filePath);
+			if(listView1.SelectedItems.Count > 0)
+			{
+				string filePath = (string)listView1.FocusedItem.Tag;
+				client.Copy(filePath);
+			}
 		}
 
 		private void 貼り付けVToolStripMenuItem_Click(object sender, EventArgs e)
@@ -735,7 +745,11 @@ namespace strawberry.ui
 
 		private void EditButton_Click(object sender, EventArgs e)
 		{
-
+			if (listView1.SelectedItems.Count > 0)
+			{
+				string path = (string)listView1.FocusedItem.Tag;
+				client.Open(path);
+			}
 		}
 
 		private void ReferenceButton_Click(object sender, EventArgs e)
