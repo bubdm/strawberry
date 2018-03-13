@@ -681,8 +681,11 @@ namespace strawberry.ui
 			if (listView1.SelectedItems.Count > 0)
 			{
 				string path = (string)listView1.FocusedItem.Tag;
+				FileAttributes a = new FileAttributes();
+				a = File.GetAttributes(path);
 				File.SetAttributes(path, FileAttributes.ReadOnly);
 				client.Open(path);
+				File.SetAttributes(path, a);
 			}
 		}
 
