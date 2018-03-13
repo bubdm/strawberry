@@ -676,6 +676,16 @@ namespace strawberry.ui
 			}
 		}
 
+		private void 参照RToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (listView1.SelectedItems.Count > 0)
+			{
+				string path = (string)listView1.FocusedItem.Tag;
+				File.SetAttributes(path, FileAttributes.ReadOnly);
+				client.Open(path);
+			}
+		}
+
 		private void コピーCToolStripMenuItem_Click(object sender, EventArgs e)
 		{
 			if(listView1.SelectedItems.Count > 0)
@@ -790,16 +800,6 @@ namespace strawberry.ui
 
 		}
 
-		private void 参照RToolStripMenuItem_Click(object sender, EventArgs e)
-		{
-			if (listView1.SelectedItems.Count > 0)
-			{
-				string path = (string)listView1.FocusedItem.Tag;
-				File.SetAttributes(path,FileAttributes.ReadOnly);
-				client.Open(path);
-			}
-		}
-
 		private void listView1_KeyDown(object sender, KeyEventArgs e)
 		{
 			if ((e.KeyCode == Keys.E) && e.Control)
@@ -808,7 +808,7 @@ namespace strawberry.ui
 			}
 			if ((e.KeyCode == Keys.R) && e.Control)
 			{
-				//編集ToolStripMenuItem1_Click(null, null);
+				参照RToolStripMenuItem_Click(null, null);
 			}
 			if ((e.KeyCode == Keys.D) && e.Control)
 			{
