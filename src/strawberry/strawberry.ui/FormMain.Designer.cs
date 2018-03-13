@@ -143,6 +143,7 @@
 			this.listView1.AfterLabelEdit += new System.Windows.Forms.LabelEditEventHandler(this.listView1_AfterLabelEdit);
 			this.listView1.SelectedIndexChanged += new System.EventHandler(this.listViewItem_Selected);
 			this.listView1.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView1_ColumnClick);
+			this.listView1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.listView1_KeyDown);
 			// 
 			// columnHeader1
 			// 

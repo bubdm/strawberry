@@ -799,5 +799,37 @@ namespace strawberry.ui
 				client.Open(path);
 			}
 		}
+
+		private void listView1_KeyDown(object sender, KeyEventArgs e)
+		{
+			if ((e.KeyCode == Keys.E) && e.Control)
+			{
+				編集ToolStripMenuItem1_Click(null, null);
+			}
+			if ((e.KeyCode == Keys.R) && e.Control)
+			{
+				//編集ToolStripMenuItem1_Click(null, null);
+			}
+			if ((e.KeyCode == Keys.D) && e.Control)
+			{
+				削除ToolStripMenuItem1_Click(null, null);
+			}
+			if ((e.KeyCode == Keys.N) && e.Control)
+			{
+				名前の変更NToolStripMenuItem_Click(null, null);
+			}
+			if ((e.KeyCode == Keys.C) && e.Control)
+			{
+				コピーCToolStripMenuItem_Click(null, null);
+			}
+			if ((e.KeyCode == Keys.V) && e.Control)
+			{
+				貼り付けVToolStripMenuItem_Click(null, null);
+			}
+			if ((e.KeyCode == Keys.P) && e.Control)
+			{
+				//編集ToolStripMenuItem1_Click(null, null);
+			}
+		}
 	}
 }
