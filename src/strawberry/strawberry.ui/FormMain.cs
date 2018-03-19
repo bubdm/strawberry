@@ -44,7 +44,6 @@ namespace strawberry.ui
 		int upint = 0;
 		bool backupbool = false;
 		TreeNode CurrentNode;
-		int xPos, yPos;
 
 		private Dictionary<int, string> dicIndex = new Dictionary<int, string>();
 
@@ -256,44 +255,40 @@ namespace strawberry.ui
 			}
 		}
 
-		//private void DisplayTreeView(string nodePath)
-		//{
-		//    try
-		//    {
-		//        ISBFile[] fileList = client.List(nodePath);
-		//        if (fileList.Count() == 0)
-		//        {
-		//            return;
-		//        }
-		//        //string[] filespath = Directory.GetFiles(nodePath);
-		//        //fileInfoList = new FileInfoList(filespath);
-
-		//        //循环文件
-		//        for (int i = 0; i < fileList.Count(); i++)
-		//        {
-		//            ListViewItem li = new ListViewItem();
-		//            if (!fileList[i].IsFolder)
-		//            {
-		//                li.Text = fileList[i].Name;
-		//                li.Tag = nodePath + "\\" + fileList[i].Name;
-		//                li.ImageIndex = fileList[i].ImageIndex;
-		//                li.SubItems.Add("AAA");
-		//                li.SubItems.Add("---");
-		//                li.SubItems.Add("123");
-		//                li.SubItems.Add(fileList[i].UpdateTime);
-		//                li.SubItems.Add(string.Format(("{0:N0}"), fileList[i].Size));
-		//                listView1.Items.Add(li);
-		//            }
-		//            treeView1.Show();
-		//        }
-		//    }
-		//    catch (Exception ex)
-		//    {
-		//        MessageBox.Show(ex.Message + "\r\n出错的位置为：FormMain.DisplayTreeView()");
-		//    }
-		//}
-
 		#endregion
+
+		//跳转
+		private void Goto()
+		{
+			try
+			{
+				TreeNode rootNode = treeView1.Nodes[0];
+				string[] nodes = textBox1.Text.Split(new char[1] { '\\' });
+				if (nodes.Length > 2)
+				{
+					string root = nodes[0] + "\\" + nodes[1];
+					if (root == rootNode.Text)
+					{
+						foreach (TreeNode n in rootNode.Nodes)
+						{
+							if (n.Text == nodes[2])
+							{
+								root = root + "\\" + nodes[2];
+								PaintTreeView(n, root);
+							}
+						}
+					}
+					else
+					{
+						MessageBox.Show("无效路径！");
+					}
+				}
+			}
+			catch(Exception e)
+			{
+				MessageBox.Show(e.Message);
+			}
+		}
 
 		//回车跳转到当前输入路径
 		private void textBox1_KeyUp(object sender, KeyEventArgs e)
@@ -302,26 +297,6 @@ namespace strawberry.ui
 			if (e.KeyCode == Keys.Control || e.KeyCode == Keys.Enter)
 			{
 				Goto();
-			}
-		}
-
-		//跳转
-		private void Goto()
-		{
-			for (int i = 0; i < treeView1.Nodes.Count; i++)
-			{
-				TreeNode node = treeView1.Nodes[i];
-				ISBFile isbFile = node.Tag as ISBFile;
-				if (isbFile.Path == textBox1.Text)
-				{
-					DisplayListView(textBox1.Text);
-					break;
-				}
-				else
-				{
-					//MessageBox.Show("无效路径！");
-					//textBox1.Clear();
-				}
 			}
 		}
 
@@ -744,7 +719,7 @@ namespace strawberry.ui
 			string Path = isbFile.Path;
 			string str = Interaction.InputBox("名前を入力してください", "新しいフォルダ", "新しいフォルダ", -1, -1);
 			Path = Path + "\\" + str;
-			if (Directory.Exists(Path))
+			if (Directory.Exists(Path) && !string.IsNullOrEmpty(str))
 			{
 				MessageBox.Show("此文件夹已经存在，无需创建！");
 			}
@@ -770,8 +745,11 @@ namespace strawberry.ui
 			if (listView1.SelectedItems.Count > 0)
 			{
 				string path = (string)listView1.FocusedItem.Tag;
+				FileAttributes a = new FileAttributes();
+				a = File.GetAttributes(path);
 				File.SetAttributes(path, FileAttributes.ReadOnly);
 				client.Open(path);
+				File.SetAttributes(path, a);
 			}
 		}
 
@@ -784,8 +762,8 @@ namespace strawberry.ui
 		{
 			TreeNode node = treeView1.SelectedNode;
 			ISBFile isbFile = node.Tag as ISBFile;
-			node.Remove();
 			client.Delete(isbFile.Path);
+			node.Remove();
 		}
 
 		private void RenameButton_Click(object sender, EventArgs e)
