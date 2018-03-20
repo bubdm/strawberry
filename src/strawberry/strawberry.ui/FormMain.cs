@@ -44,6 +44,9 @@ namespace strawberry.ui
 		int upint = 0;
 		bool backupbool = false;
 		TreeNode CurrentNode;
+		int temp = 1;
+
+		private List<string> nodeName = new List<string>();
 
 		private Dictionary<int, string> dicIndex = new Dictionary<int, string>();
 
@@ -92,19 +95,24 @@ namespace strawberry.ui
 		{
 			try
 			{
-				ISBFile[] fileList = client.List(fullPath);
-
-				//循环文件夹
-				for (int i = 0; i < fileList.Count(); i++)
+				if (ptreeNode.Nodes.Count == 0)
 				{
-					TreeNode treeNode = new TreeNode();
-					treeNode.Text = fileList[i].Name;
-					treeNode.Tag = fileList[i];
-					if (fileList[i].IsFolder)
+					ISBFile[] fileList = client.List(fullPath);
+
+					//循环文件夹
+					for (int i = 0; i < fileList.Count(); i++)
 					{
-						ptreeNode.Nodes.Add(treeNode);
+						TreeNode treeNode = new TreeNode();
+						treeNode.Text = fileList[i].Name;
+						treeNode.Tag = fileList[i];
+						if (fileList[i].IsFolder)
+						{
+							ptreeNode.Nodes.Add(treeNode);
+						}
 					}
 				}
+				treeView1.SelectedNode = ptreeNode;
+				ptreeNode.Expand();
 			}
 			catch (Exception ex)
 			{
@@ -262,32 +270,76 @@ namespace strawberry.ui
 		{
 			try
 			{
-				TreeNode rootNode = treeView1.Nodes[0];
-				string[] nodes = textBox1.Text.Split(new char[1] { '\\' });
-				if (nodes.Length > 2)
+				string[] names = textBox1.Text.Split(new char[1] {'\\'});
+				if (names.Length < 2)
 				{
-					string root = nodes[0] + "\\" + nodes[1];
-					if (root == rootNode.Text)
+					MessageBox.Show("无效路径！");
+					return;
+				}
+				if (names.Length == 2 && textBox1.Text == GetPath().Path)
+				{
+					listView1.Items.Clear();
+					DisplayListView(GetPath().Path);
+					return;
+				}
+				if (names.Length > 2 && names[0] + "\\" + names[1] == GetPath().Path)
+				{
+					string path = GetPath().Path;
+					nodeName.Clear();
+					nodeName.Add(path);
+					for (int i = 2; i < names.Length; i++)
 					{
-						foreach (TreeNode n in rootNode.Nodes)
+						nodeName.Add(names[i]);
+					}
+					TreeNode node = treeView1.Nodes[0];
+					while (temp < nodeName.Count)
+					{
+						node = ExpandNode(node, path);
+						if (node == null)
 						{
-							if (n.Text == nodes[2])
-							{
-								root = root + "\\" + nodes[2];
-								PaintTreeView(n, root);
-							}
+							MessageBox.Show("无效路径！");
+							return;
 						}
+						path = path + "\\" + node.Text;
+					}
+					temp = 1;
+					TreeNode sNode = treeView1.SelectedNode;
+					ISBFile isbFile = sNode.Tag as ISBFile;
+					if (isbFile.Path == textBox1.Text)
+					{
+						listView1.Items.Clear();
+						DisplayListView(textBox1.Text);
 					}
 					else
 					{
 						MessageBox.Show("无效路径！");
+						return;
 					}
+				}
+				else
+				{
+					MessageBox.Show("无效路径！");
+					return;
 				}
 			}
 			catch(Exception e)
 			{
 				MessageBox.Show(e.Message);
 			}
+		}
+
+		private TreeNode ExpandNode(TreeNode node, string path)
+		{
+			for (int i = 0; i < node.Nodes.Count; i++)
+			{
+				if (node.Nodes[i].Text == nodeName[temp])
+				{
+					PaintTreeView(node.Nodes[i], path + "\\" + node.Nodes[i].Text);
+					temp++;
+					return node.Nodes[i];
+				}
+			}
+			return null;
 		}
 
 		//回车跳转到当前输入路径
