@@ -19,7 +19,7 @@ namespace strawberry.ui
 	{
 		ISBClient client = new LanFolderClient();
 		FileInfoList fileInfoList;
-
+		public static ListViewItem listViewItem;
 		public FormMain()
 		{
 			InitializeComponent();
@@ -55,6 +55,13 @@ namespace strawberry.ui
 			get
 			{
 				return dicIndex.Count;
+			}
+		}
+		public ListViewItem listViewSelectedItem
+		{
+			get
+			{
+				return listViewItem;
 			}
 		}
 
@@ -867,6 +874,18 @@ namespace strawberry.ui
 			if ((e.KeyCode == Keys.P) && e.Control)
 			{
 				//編集ToolStripMenuItem1_Click(null, null);
+			}
+		}
+
+		private void 属性PToolStripMenuItem_Click(object sender, EventArgs e)
+		{
+			if (listView1.SelectedItems.Count > 0)
+			{
+				listViewItem = listView1.FocusedItem;
+				
+				AssistAttribute assistattribute = new AssistAttribute();
+
+				assistattribute.ShowDialog(this);
 			}
 		}
 	}

@@ -266,6 +266,7 @@
 			this.属性PToolStripMenuItem.Name = "属性PToolStripMenuItem";
 			this.属性PToolStripMenuItem.Size = new System.Drawing.Size(184, 22);
 			this.属性PToolStripMenuItem.Text = "属性(P)";
+			this.属性PToolStripMenuItem.Click += new System.EventHandler(this.属性PToolStripMenuItem_Click);
 			// 
 			// toolStrip1
 			// 

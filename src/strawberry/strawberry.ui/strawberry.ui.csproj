@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AssistAttribute.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AssistAttribute.Designer.cs">
+      <DependentUpon>AssistAttribute.cs</DependentUpon>
+    </Compile>
     <Compile Include="Class1.cs" />
     <Compile Include="FormMain.cs">
       <SubType>Form</SubType>
@@ -95,6 +101,9 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AssistAttribute.resx">
+      <DependentUpon>AssistAttribute.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
     </EmbeddedResource>
