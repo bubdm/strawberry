@@ -180,24 +180,6 @@ namespace strawberry.ui
 			return retbool;
 		}
 
-
-		//private TreeNode FindNode(TreeNodeCollection node, string name)
-		//{
-		//    //接受返回的节点
-		//    TreeNode ret = null;
-		//    //循环查找
-		//    foreach (TreeNode temp in node)
-		//    {
-		//        if (temp.Text == name)
-		//        {
-		//            ret = temp;
-		//            return ret;
-		//        }
-		//    }
-
-		//    return ret;
-		//}
-
 		private void treeView1_AfterSelect(object sender, TreeViewEventArgs e)
 		{
 			index = index + 1;
@@ -356,6 +338,7 @@ namespace strawberry.ui
 			if (e.KeyCode == Keys.Control || e.KeyCode == Keys.Enter)
 			{
 				Goto();
+				treeView1.Select();
 			}
 		}
 
@@ -492,50 +475,6 @@ namespace strawberry.ui
 					return tempInt;
 				}
 			}
-		}
-
-		// 返回选中节点的完整路径
-		private string selectNodePath(TreeView treeview, TreeNode node1)
-		{
-			TreeNode tn = new TreeNode();
-			tn = node1.Parent;
-			if (tn == null)
-			{
-				str = str.Insert(0, node1.Text.ToString() + "\\");
-
-			}
-			else
-			{
-				str = str.Insert(0, node1.Text.ToString() + "\\");
-				selectNodePath(treeview, tn);
-			}
-			return str;
-		}
-
-		//递归查询,找到返回该节点
-		private TreeNode FindNode(TreeNode node, string name)
-		{
-			//接受返回的节点
-			TreeNode ret = null;
-			//循环查找
-			foreach (TreeNode temp in node.Nodes)
-			{
-				//是否有子节点
-				if (temp.Nodes.Count != 0)
-				{
-					//如果找到
-					if ((ret = FindNode(temp, name)) != null)
-					{
-						return ret;
-					}
-				}
-				//如果找到
-				if (string.Equals(temp.Text, name))
-				{
-					return temp;
-				}
-			}
-			return ret;
 		}
 
 		private void textBox1_TextChanged(object sender, EventArgs e)
