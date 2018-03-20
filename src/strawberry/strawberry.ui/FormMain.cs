@@ -781,7 +781,8 @@ namespace strawberry.ui
 
 		private void SettingButton_Click(object sender, EventArgs e)
 		{
-
+			Setting st = new Setting();
+			st.ShowDialog();
 		}
 
 		private void listView1_KeyDown(object sender, KeyEventArgs e)
