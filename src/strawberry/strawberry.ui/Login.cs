@@ -10,7 +10,6 @@ using System.Xml;
 using System.Xml.Linq;
 using Microsoft.Win32;
 using System.Threading;
-using System.Timers;
 
 namespace strawberry.ui
 {
@@ -63,20 +62,16 @@ namespace strawberry.ui
 				regkey.SetValue("CheckState", checkBox1.CheckState);
 				regkey.SetValue("UserName", textBox_UserName.Text);
 				regkey.SetValue("PassWord", textBox_PassWord.Text);
-				this.DialogResult = DialogResult.OK;
 				if (regkey.GetValue("CheckState").ToString() == "Checked")
 				{
-					System.Timers.Timer timer1 = new System.Timers.Timer();
-					// 循环间隔时间
-					timer1.Interval = 50000;
-					// 允许Timer执行
+					timer1.Interval = 1000;
 					timer1.Enabled = true;
-					// 到时间的时候执行事件
-					timer1.Elapsed += new ElapsedEventHandler(timer1_Tick);
-					//执行一次
-					timer1.AutoReset = false;
 				}
-				//this.Close();
+				else
+				{
+					this.DialogResult = DialogResult.OK;
+					this.Close();
+				}
 			}
 			else
 			{
@@ -105,7 +100,8 @@ namespace strawberry.ui
 
 		private void timer1_Tick(object sender, EventArgs e)
 		{
-			this.Close();
+			timer1.Stop();
+			this.DialogResult = DialogResult.OK;
 		}
 	}
 }
