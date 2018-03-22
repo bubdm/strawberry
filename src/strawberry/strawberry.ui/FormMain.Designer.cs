@@ -186,7 +186,7 @@
             this.フォルダの新規作成ToolStripMenuItem,
             this.属性PToolStripMenuItem});
 			this.contextMenuStrip1.Name = "contextMenuStrip1";
-			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 202);
+			this.contextMenuStrip1.Size = new System.Drawing.Size(185, 180);
 			// 
 			// 編集ToolStripMenuItem1
 			// 
@@ -464,9 +464,9 @@
 			this.toolStrip3.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.SettingButton,
             this.ModeSwitchButton});
-			this.toolStrip3.Location = new System.Drawing.Point(874, 25);
+			this.toolStrip3.Location = new System.Drawing.Point(889, 25);
 			this.toolStrip3.Name = "toolStrip3";
-			this.toolStrip3.Size = new System.Drawing.Size(108, 25);
+			this.toolStrip3.Size = new System.Drawing.Size(115, 25);
 			this.toolStrip3.TabIndex = 13;
 			this.toolStrip3.Text = "toolStrip3";
 			// 
@@ -489,20 +489,20 @@
 			this.ModeSwitchButton.Image = ((System.Drawing.Image)(resources.GetObject("ModeSwitchButton.Image")));
 			this.ModeSwitchButton.ImageTransparentColor = System.Drawing.Color.Magenta;
 			this.ModeSwitchButton.Name = "ModeSwitchButton";
-			this.ModeSwitchButton.Size = new System.Drawing.Size(69, 22);
-			this.ModeSwitchButton.Text = "模式切换";
+			this.ModeSwitchButton.Size = new System.Drawing.Size(45, 22);
+			this.ModeSwitchButton.Text = "様式";
 			// 
 			// 详细模式ToolStripMenuItem
 			// 
 			this.详细模式ToolStripMenuItem.Name = "详细模式ToolStripMenuItem";
-			this.详细模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.详细模式ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.详细模式ToolStripMenuItem.Text = "详细模式";
 			this.详细模式ToolStripMenuItem.Click += new System.EventHandler(this.详细模式ToolStripMenuItem_Click_1);
 			// 
 			// 图表模式ToolStripMenuItem
 			// 
 			this.图表模式ToolStripMenuItem.Name = "图表模式ToolStripMenuItem";
-			this.图表模式ToolStripMenuItem.Size = new System.Drawing.Size(124, 22);
+			this.图表模式ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
 			this.图表模式ToolStripMenuItem.Text = "图标模式";
 			this.图表模式ToolStripMenuItem.Click += new System.EventHandler(this.图标模式ToolStripMenuItem_Click);
 			// 

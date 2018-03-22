@@ -57,11 +57,20 @@ namespace strawberry.ui
 				return dicIndex.Count;
 			}
 		}
+
 		public ListViewItem listViewSelectedItem
 		{
 			get
 			{
 				return listViewItem;
+			}
+		}
+
+		public string path
+		{
+			get
+			{
+				return GetPath().Path;
 			}
 		}
 

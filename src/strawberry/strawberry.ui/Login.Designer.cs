@@ -28,6 +28,7 @@
 		/// </summary>
 		private void InitializeComponent()
 		{
+			this.components = new System.ComponentModel.Container();
 			this.label1 = new System.Windows.Forms.Label();
 			this.label2 = new System.Windows.Forms.Label();
 			this.textBox_UserName = new System.Windows.Forms.TextBox();
@@ -35,6 +36,7 @@
 			this.button1 = new System.Windows.Forms.Button();
 			this.button2 = new System.Windows.Forms.Button();
 			this.checkBox1 = new System.Windows.Forms.CheckBox();
+			this.timer1 = new System.Windows.Forms.Timer(this.components);
 			this.SuspendLayout();
 			// 
 			// label1
@@ -65,15 +67,14 @@
 			this.textBox_UserName.Name = "textBox_UserName";
 			this.textBox_UserName.Size = new System.Drawing.Size(158, 19);
 			this.textBox_UserName.TabIndex = 2;
-			this.textBox_UserName.Text = "admin";
 			// 
 			// textBox_PassWord
 			// 
 			this.textBox_PassWord.Location = new System.Drawing.Point(155, 63);
 			this.textBox_PassWord.Name = "textBox_PassWord";
+			this.textBox_PassWord.PasswordChar = '*';
 			this.textBox_PassWord.Size = new System.Drawing.Size(158, 19);
 			this.textBox_PassWord.TabIndex = 3;
-			this.textBox_PassWord.Text = "admin";
 			// 
 			// button1
 			// 
@@ -105,6 +106,10 @@
 			this.checkBox1.Text = "自動登録";
 			this.checkBox1.UseVisualStyleBackColor = true;
 			// 
+			// timer1
+			// 
+			this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+			// 
 			// Login
 			// 
 			this.AcceptButton = this.button1;
@@ -125,6 +130,7 @@
 			this.Name = "Login";
 			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
 			this.Text = "登録";
+			this.Load += new System.EventHandler(this.Login_Load);
 			this.ResumeLayout(false);
 			this.PerformLayout();
 
@@ -139,5 +145,6 @@
 		private System.Windows.Forms.Button button1;
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.CheckBox checkBox1;
+		private System.Windows.Forms.Timer timer1;
 	}
 }
